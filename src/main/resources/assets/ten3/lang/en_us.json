@@ -1,0 +1,177 @@
+{
+  "itemGroup.ten3.item": "Technical Engineering 3 | Item",
+  "itemGroup.ten3.block": "Technical Engineering 3 | Block",
+
+  "ten3.starlight_stone": "Starlight Stone",
+  "ten3.starlight_andesite": "Starlight Andesite",
+  "ten3.starlight_diorite": "Starlight Diorite",
+  "ten3.starlight_granite": "Starlight Granite",
+  "ten3.starlight_sand": "Starlight Sand",
+  "ten3.starlight_grass_block": "Starlight Grass Block",
+  "ten3.starlight_crystal": "Starlight Crystal",
+  "ten3.starlight_log": "Starlight Log",
+  "ten3.starlight_leaves": "Starlight Leaves",
+  "ten3.starlight_seed": "Starlight Origin Seed",
+
+  "ten3.luminous_dust": "Luminous Dust",
+  
+  "ten3.copper_ore": "Copper Ore",
+  "ten3.copper_dust": "Copper Dust",
+  "ten3.copper_ingot": "Copper Ingot",
+  "ten3.copper_plate": "Copper Plate",
+  "ten3.copper_gear": "Copper Gear",
+
+  "ten3.tin_ore": "Tin Ore",
+  "ten3.tin_ingot": "Tin Ingot",
+  "ten3.tin_dust": "Tin Dust",
+  "ten3.tin_plate": "Tin Plate",
+  "ten3.tin_gear": "Tin Gear",
+
+  "ten3.nickel_ore": "Nickel Ore",
+  "ten3.nickel_ingot": "Nickel Ingot",
+  "ten3.nickel_dust": "Nickel Dust",
+  "ten3.nickel_plate": "Nickel Plate",
+  "ten3.nickel_gear": "Nickel Gear",
+  
+  "ten3.powered_tin_ingot": "Powered Tin Ingot",
+  "ten3.powered_tin_dust": "Powered Tin Dust",
+  "ten3.powered_tin_plate": "Powered Tin Plate",
+  "ten3.powered_tin_gear": "Powered Tin Gear",
+
+  "ten3.chlorium_ingot": "Chlorium Ingot",
+  "ten3.chlorium_dust": "Chlorium Dust",
+  "ten3.chlorium_plate": "Chlorium Plate",
+  "ten3.chlorium_gear": "Chlorium Gear",
+
+  "ten3.gold_dust": "Gold Dust",
+  "ten3.gold_plate": "Gold Plate",
+  "ten3.gold_gear": "Gold Gear",
+
+  "ten3.iron_dust": "Iron Dust",
+  "ten3.iron_plate": "Iron Plate",
+  "ten3.iron_gear": "Iron Gear",
+
+  "ten3.starlight_dust": "Starlight Dust",
+
+  "ten3.world_bag": "World Bag",
+  "ten3.energy_core": "Energy Core",
+  "ten3.machine_frame": "Machine Frame",
+  "ten3.redstone_conductor": "Redstone Conductor",
+  "ten3.redstone_storer": "Redstone Storer",
+  "ten3.redstone_converter": "Redstone Converter",
+
+  "ten3.engine_extraction": "Extraction Engine",
+  "ten3.machine_farm_manager": "Farm Manager",
+  "ten3.engine_metal": "Metal Engine",
+  "ten3.machine_smelter": "Smelter",
+  "ten3.machine_pulverizer": "Pulverizer",
+  "ten3.machine_compressor": "Compressor",
+  "ten3.machine_beacon_simulator": "Beacon Simulator",
+
+  "ten3.cell_glass": "Glass Energy Cell",
+  "ten3.cell_golden": "Golden Energy Cell",
+  "ten3.cable_glass": "Glass Energy Cable",
+  "ten3.cable_golden": "Golden Energy Cable",
+
+  "ten3.spanner": "Spanner",
+  "ten3.energy_capacity": "FE Capacity",
+
+  "ten3.shift": "Press [SHIFT] to see more",
+
+  "ten3.speed_upgrade": "High-speed Conduction Upgrade",
+  "ten3.energy_upgrade": "Efficient Suppression Upgrade",
+  "ten3.storage_upgrade": "Redstone Charging Upgrade",
+  "ten3.transfer_upgrade": "Dynamic Transference Upgrade",
+  "ten3.item_upgrade": "Item Pump Upgrade",
+  "ten3.gem_upgrade": "Gem Burner Upgrade",
+
+  "ten3.info.upgrade.limit": "Install Limit: ",
+  "ten3.info.speed_upgrade.0": "Machine: Efficient UP",
+  "ten3.info.speed_upgrade.1": "Make the machine run faster.",
+  "ten3.info.speed_upgrade.2": "But also, it will spend more energy",
+  "ten3.info.energy_upgrade.0": "Machine: Efficient DOWN",
+  "ten3.info.energy_upgrade.1": "Make the machine run more slowly.",
+  "ten3.info.energy_upgrade.2": "Because of that, it will spend less energy",
+  "ten3.info.storage_upgrade.0": "Machine: Capacity UP",
+  "ten3.info.storage_upgrade.1": "Extra capacity for your machine!",
+  "ten3.info.transfer_upgrade.0": "Machine: Transference Speed UP",
+  "ten3.info.transfer_upgrade.1": "Make the machine's max energy input and output higher.",
+  "ten3.info.augmented_levelup.0": "Machine: Level UP to Augmented",
+  "ten3.info.augmented_levelup.1": "Another two upgrade slots!",
+  "ten3.info.powered_levelup.0": "Machine: Level UP to Powered",
+  "ten3.info.powered_levelup.1": "Another two upgrade slots!",
+
+  "ten3.info.too_much_upgrades": "This machine has too many upgrades! Please increase its level...",
+  "ten3.info.not_support_upgrade": "This machine don't support the update!",
+  "ten3.info.upgrade_successfully": " installed successfully.",
+
+  "ten3.augmented_levelup": "Augmented Levelup Kit",
+  "ten3.powered_levelup": "Powered Levelup Kit",
+
+  "ten3.level.0": " (Common)",
+  "ten3.level.1": " (Augmented)",
+  "ten3.level.2": " (Powered)",
+
+  "ten3.info.spanner.dire.energy": "Energy Transference: ",
+  "ten3.info.spanner.dire.item": "Item Transference: ",
+  "ten3.info.spanner.dire.redstone": "Redstone Mode: ",
+  "ten3.info.spanner.mode": "Mode: ",
+  "ten3.info.mode.0": "Energy",
+  "ten3.info.mode.1": "Item",
+  "ten3.info.mode.2": "Redstone",
+  "ten3.info.mode.3": "Downgrade",
+  "ten3.info.mode.4": "Destroy",
+
+  "ten3.info.in": "Initiative Input",
+  "ten3.info.out": "Initiative Output",
+  "ten3.info.be_in": "Passive Input",
+  "ten3.info.be_out": "Passive Output",
+  "ten3.info.both": "Passive Both-Side",
+  "ten3.info.none": "None",
+  "ten3.info.off": "Off",
+  "ten3.info.low": "Low",
+  "ten3.info.high": "High",
+
+  "ten3.info.bar_ideas": "Information: ",
+  "ten3.info.bar_redstone": "Redstone Control: ",
+  "ten3.info.bar_transfer": "Transference Control: ",
+  "ten3.info.bar_energy": "Efficient: ",
+  "ten3.info.bar_upgrade": "Upgrades: ",
+  "ten3.info.bar_energy_fact": "Actual Efficient: ",
+  "ten3.info.bar_energy_max": "Max Efficient: ",
+  "ten3.info.bar_energy_in_max": "Max Input Efficient: ",
+  "ten3.info.bar_energy_out_max": "Max Output Efficient: ",
+  "ten3.locked_slot": "This slot hasn't been unlocked yet.",
+
+  "ten3.info.engine_extraction.0": "A Common Generator.",
+  "ten3.info.engine_extraction.1": "Extract Energy from fuel.",
+
+  "ten3.info.smelter.0": "Turn energy into heats.",
+  "ten3.info.smelter.1": "Provide higher speed than Furnace.",
+  "ten3.info.smelter.2": "The more energy it storages, the faster it will be.",
+
+  "ten3.info.pulverizer.0": "Crush ores into powder.",
+  "ten3.info.pulverizer.1": "Classic Tech-Mod play style ~",
+  "ten3.info.pulverizer.2": "It also has other uses, such as pulverize blaze-rods and bones.",
+  "ten3.info.pulverizer.4": "Stone can be pulverized into gravel, then into sand and dirt.",
+
+  "ten3.info.compressor.0": "Compress -- and make necessary materials.",
+  "ten3.info.compressor.1": "Put metal ingots in, then get plates out.",
+
+  "ten3.info.cell.0": "Storage plenty of energy.",
+  "ten3.info.cell.1": "Also, it has the ability to charge items.",
+
+  "ten3.info.beacon_simulator.0": "Expand potion effect to players in a area.",
+  "ten3.info.beacon_simulator.1": "It needs a template of potion item.",
+  "ten3.info.beacon_simulator.2": "Brew a potion, use anytime ~",
+  "ten3.info.beacon_simulator.3": "And, Pay attention to your ENERGY!",
+
+  "ten3.info.farm_manager.0": "Throw your farm work to it!",
+  "ten3.info.farm_manager.1": "Give it some seeds, and they will be automatically planted.",
+  "ten3.info.farm_manager.2": "Ripe crops will also be harvested.",
+
+  "ten3.info.engine_metal.0": "Generate Energy by metal.",
+  "ten3.info.engine_metal.1": "Throw all useless ingots into it, now!",
+  "ten3.info.engine_metal.2": "Besides, Netherite can generate the most.",
+  "ten3.info.engine_metal.3": "But who will do that?"
+}

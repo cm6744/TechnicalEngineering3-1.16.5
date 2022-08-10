@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "ten3:block/star/starlight_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "ten3:block/star/starlight_log"
+    },
+    "axis=z": {
+      "model": "ten3:block/star/starlight_log_horizontal",
+      "x": 90
+    }
+  }
+}

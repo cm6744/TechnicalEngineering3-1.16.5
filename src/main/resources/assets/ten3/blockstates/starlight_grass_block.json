@@ -1,0 +1,39 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "ten3:block/star/starlight_grass_block"
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block",
+        "y": 90
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block",
+        "y": 180
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block",
+        "y": 270
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block_empty"
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block_empty",
+        "y": 90
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block_empty",
+        "y": 180
+      },
+      {
+        "model": "ten3:block/star/starlight_grass_block_empty",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "minecraft:block/grass_block_snow"
+    }
+  }
+}

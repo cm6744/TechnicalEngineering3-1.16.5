@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "ten3:block/star/starlight_crystal_blue_small"
+      },
+      {
+        "model": "ten3:block/star/starlight_crystal_blue_large"
+      },
+      {
+        "model": "ten3:block/star/starlight_crystal_blue_medium"
+      },
+      {
+        "model": "ten3:block/star/starlight_crystal_blue_light"
+      }
+    ]
+  }
+}

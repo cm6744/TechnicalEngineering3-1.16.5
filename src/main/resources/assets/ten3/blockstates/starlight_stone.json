@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "ten3:block/star/starlight_stone"
+      },
+      {
+        "model": "ten3:block/star/starlight_stone",
+        "y": 180
+      }
+    ]
+  }
+}

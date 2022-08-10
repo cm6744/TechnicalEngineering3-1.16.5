@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "CAC",
+    " B "
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:plates/copper"
+    },
+    "B": {
+      "tag": "forge:dusts/chlorium"
+    },
+    "C": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "ten3:energy_upgrade"
+  }
+}
