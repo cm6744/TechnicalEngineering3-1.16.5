@@ -41,7 +41,7 @@ public class BeaconTile extends CmTileMachine {
         return Type.MACHINE_EFFECT;
     }
 
-    int radius = 4;
+    int radius;
 
     public void update() {
 
@@ -55,7 +55,7 @@ public class BeaconTile extends CmTileMachine {
 
         if(energySupportRun()) {
             data.translate(energy, -getActual());
-            if(effectApplyTickOn()) {
+            if(effectApplyTickOn(7.5, 100)) {
                 AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).grow(radius).expand(0, world.getHeight(), 0);
                 List<PlayerEntity> list = world.getEntitiesWithinAABB(PlayerEntity.class, axisalignedbb);
 

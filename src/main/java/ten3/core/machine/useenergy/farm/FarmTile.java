@@ -68,7 +68,7 @@ public class FarmTile extends CmTileMachine {
 
         if(energySupportRun()) {
             data.translate(energy, -getActual());
-            if(effectApplyTickOn()) {
+            if(effectApplyTickOn(4, 100)) {
             WorkUtil.runIn(radius, pos, (pin) -> {
                 BlockPos pd = pin.down();
                 BlockState s = world.getBlockState(pin);
@@ -85,6 +85,7 @@ public class FarmTile extends CmTileMachine {
                             if(itr.selfGive(stack, true)) {
                                 itr.selfGive(stack, false);
                                 world.destroyBlock(pin, false);
+                                return;
                             }
                         }
                     }
@@ -97,6 +98,7 @@ public class FarmTile extends CmTileMachine {
                         if(plant instanceof CropsBlock) {
                             world.setBlockState(pin, plant.getDefaultState());
                             itr.selfGet(1, 0, 5, false);
+                            return;
                         }
                     }
                 }

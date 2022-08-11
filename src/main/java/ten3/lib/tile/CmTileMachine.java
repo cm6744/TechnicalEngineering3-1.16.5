@@ -29,6 +29,7 @@ import ten3.core.block.Machine;
 import ten3.core.block.MachinePostEvent;
 import ten3.core.item.upgrades.LevelupItem;
 import ten3.core.item.upgrades.UpgradeItem;
+import ten3.lib.tile.option.Level;
 import ten3.util.DireUtil;
 import ten3.lib.capability.energy.EnergyTransferor;
 import ten3.lib.capability.energy.FEStorageTile;
@@ -424,9 +425,14 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     }
 
-    public boolean effectApplyTickOn() {
+    public boolean effectApplyTickOn(double min, double max) {
 
-         return getTileAliveTime() % 200 * (1 - getActualPercent()) == 0 || typeOf() != Type.MACHINE_EFFECT;
+         if(typeOf() != Type.MACHINE_EFFECT) return true;
+
+         int k22 = ((int) ((1 - getActualPercent()) * max + min * (1 - efficientIn / (double)initialEfficientIn)));
+         if(k22 <= 0) return true;
+
+         return getTileAliveTime() % k22 == 0;
 
     }
 

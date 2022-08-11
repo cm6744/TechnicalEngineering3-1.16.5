@@ -34,6 +34,7 @@ public class BlockInit {
         regMachine("pulverizer");
         regMachine("compressor");
         regMachine("beacon_simulator");
+        regMachine("mob_ripper");
 
         regCable("cable_glass", Material.GLASS, SoundType.GLASS);
         regCable("cable_golden", Material.IRON, SoundType.STONE);

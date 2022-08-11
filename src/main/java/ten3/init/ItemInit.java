@@ -77,6 +77,7 @@ public class ItemInit {
         regItemMachine("pulverizer");
         regItemMachine("compressor");
         regItemMachine("beacon_simulator");
+        regItemMachine("mob_ripper");
 
         regItemMachineWithoutID("cell_glass");
         regItemMachineWithoutID("cell_golden");
