@@ -427,6 +427,9 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     public boolean effectApplyTickOn(double min, double max) {
 
+        min *= 20;
+        max *= 20;//s
+
          if(typeOf() != Type.MACHINE_EFFECT) return true;
 
          int k22 = ((int) ((1 - getActualPercent()) * max + min * (1 - efficientIn / (double)initialEfficientIn)));
