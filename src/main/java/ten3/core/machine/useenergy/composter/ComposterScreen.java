@@ -11,7 +11,7 @@ public class ComposterScreen extends CmScreenMachine {
 
     public ComposterScreen(CmContainerMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 
-        super(screenContainer, inv, titleIn, "textures/gui/compressor.png", 256, 256);
+        super(screenContainer, inv, titleIn, "textures/gui/one_to_one.png", 256, 256);
         xSize = 176;
         ySize = 166;
 

@@ -11,7 +11,7 @@ public class FurnaceScreen extends CmScreenMachine {
 
     public FurnaceScreen(CmContainerMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 
-        super(screenContainer, inv, titleIn, "textures/gui/smelter.png", 256, 256);
+        super(screenContainer, inv, titleIn, "textures/gui/one_to_one.png", 256, 256);
         xSize = 176;
         ySize = 166;
 
