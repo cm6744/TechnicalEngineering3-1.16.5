@@ -6,25 +6,23 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.server.ServerWorld;
-import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.FaceOption;
 import ten3.lib.tile.option.Type;
+import ten3.lib.tile.recipe.CmTileMachineRadiused;
 import ten3.lib.wrapper.SlotCm;
 import ten3.lib.wrapper.SlotCustomCm;
 import ten3.util.WorkUtil;
 
-public class FarmTile extends CmTileMachine {
+import java.util.List;
+
+public class FarmTile extends CmTileMachineRadiused {
 
     public FarmTile(String name) {
 
         super(name);
 
-        setCap(kFE(0.1), kFE(0.1), kFE(20), FaceOption.BE_IN, FaceOption.OUT, 10);
+        setCap(kFE(20), FaceOption.BE_IN, FaceOption.OUT, 10);
 
         SlotCustomCm.Condition onlySeed = (s) -> {
             if(s.getItem() instanceof BlockItem) {
@@ -54,7 +52,17 @@ public class FarmTile extends CmTileMachine {
         return Type.MACHINE_EFFECT;
     }
 
-    int radius = 4;
+    @Override
+    public int getRadiusFromLevel(int levelIn)
+    {
+        return (levelIn + 1) * 3;
+    }
+
+    @Override
+    public boolean isInWorkRadius(BlockPos pos)
+    {
+        return pos.withinDistance(this.pos, radius);
+    }
 
     public void update() {
 
@@ -64,29 +72,26 @@ public class FarmTile extends CmTileMachine {
             return;
         }
 
-        radius = (levelIn + 1) * 4;
-
         if(energySupportRun()) {
-            data.translate(energy, -getActual());
-            if(effectApplyTickOn(4, 100)) {
-            WorkUtil.runIn(radius, pos, (pin) -> {
+
+            data.translate(ENERGY, -getActual());
+
+            if(effectApplyTickOnScd(1, 20)) {
+
+                WorkUtil.runIn(radius, pos, (pin) -> {
                 BlockPos pd = pin.down();
                 BlockState s = world.getBlockState(pin);
                 BlockState sd = world.getBlockState(pd);
+                boolean ret = false;
 
                 if(s.getBlock() instanceof CropsBlock) {
                     CropsBlock cr = (CropsBlock) s.getBlock();
                     int age = s.get(cr.getAgeProperty());
                     if(age >= cr.getMaxAge()) {
-                        for(ItemStack stack : s.getDrops(new LootContext.Builder((ServerWorld) world)
-                                .withRandom(world.rand)
-                                .withParameter(LootParameters.ORIGIN, Vector3d.copyCentered(pos))
-                                .withParameter(LootParameters.TOOL, ItemStack.EMPTY))) {
-                            if(itr.selfGive(stack, true)) {
-                                itr.selfGive(stack, false);
-                                world.destroyBlock(pin, false);
-                                return;
-                            }
+                        List<ItemStack> ss = s.getDrops(WorkUtil.getLoot(world, pos));
+                        if(itr.selfGiveList(ss, true)) {
+                            itr.selfGiveList(ss, false);
+                            world.destroyBlock(pin, false);
                         }
                     }
                 }
@@ -98,11 +103,12 @@ public class FarmTile extends CmTileMachine {
                         if(plant instanceof CropsBlock) {
                             world.setBlockState(pin, plant.getDefaultState());
                             itr.selfGet(1, 0, 5, false);
-                            return;
+                            ret = true;
                         }
                     }
                 }
                 //end
+                return ret;
             });
             }
         }

@@ -7,12 +7,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import ten3.TER;
+import ten3.TConst;
 import ten3.core.network.check.PTCCheckPack;
 import ten3.core.network.check.PTSCheckPack;
-import ten3.core.network.packets.PTCInfoClientPack;
-import ten3.core.network.packets.PTSRedStatePack;
-import ten3.core.network.packets.PTSUpgradeOffPack;
+import ten3.core.network.packets.*;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Network {
@@ -24,7 +22,7 @@ public class Network {
 
         instance = NetworkRegistry.newSimpleChannel
                 (
-                        new ResourceLocation(TER.modid, "ten3_network_handler"),
+                        new ResourceLocation(TConst.modid, "ten3_network_handler"),
                         () -> "1.0",
                         (v) -> true,
                         (v) -> true
@@ -60,14 +58,6 @@ public class Network {
                         PTCInfoClientPack::writeBuffer,
                         PTCInfoClientPack::new,
                         PTCInfoClientPack::run
-                );
-        instance.registerMessage
-                (
-                        id++,
-                        PTSUpgradeOffPack.class,
-                        PTSUpgradeOffPack::writeBuffer,
-                        PTSUpgradeOffPack::new,
-                        PTSUpgradeOffPack::run
                 );
 
     }

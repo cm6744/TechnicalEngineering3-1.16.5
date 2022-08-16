@@ -25,7 +25,7 @@ public class PulverizerScreen extends CmScreenMachine {
 
         super.addWidgets();
 
-        widgets.add(energy = new ElementBurnLeft(9, 18, 14, 46, 0, 0, handler, true));
+        widgets.add(energy = getDefaultEne());
         widgets.add(left = new ElementBurnLeft(45, 48, 13, 13, 14, 0, handler));
         widgets.add(progress = new ElementProgress(76, 35, 22, 16, 27, 32, handler));
 

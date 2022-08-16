@@ -2,8 +2,17 @@ package ten3.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.World;
 
 public class ItemUtil {
+
+    public static void damage(ItemStack stack, World world, int am) {
+
+        if(stack.attemptDamageItem(am, world.rand, null)) {
+            stack.setCount(0);
+        }
+
+    }
 
     public static void setTag(ItemStack stack, String name, int cr) {
 

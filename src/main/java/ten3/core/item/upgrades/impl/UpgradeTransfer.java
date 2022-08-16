@@ -10,21 +10,10 @@ public class UpgradeTransfer extends UpgradeItem {
 
         tile.maxReceive += tile.initialReceive;
         tile.maxExtract += tile.initialExtract;
+        tile.maxReceiveItem += tile.initialItemReceive;
+        tile.maxExtractItem += tile.initialItemExtract;
         return true;
 
-    }
-
-    @Override
-    public void reset(CmTileMachine tile) {
-
-        tile.maxReceive -= tile.initialReceive;
-        tile.maxExtract -= tile.initialExtract;
-
-    }
-
-    @Override
-    public int limit() {
-        return 2;
     }
 
 }

@@ -4,6 +4,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import ten3.TechnicalEngineering;
 import ten3.core.machine.cell.CellTileGolden;
+import ten3.core.machine.engine.biomass.BiomassTile;
 import ten3.core.machine.engine.extractor.ExtractorTile;
 import ten3.core.machine.engine.metalizer.MetalizerTile;
 import ten3.core.machine.cable.CableTile;
@@ -14,6 +15,7 @@ import ten3.core.machine.useenergy.compressor.CompressorTile;
 import ten3.core.machine.useenergy.farm.FarmTile;
 import ten3.core.machine.useenergy.mobrip.MobRipTile;
 import ten3.core.machine.useenergy.pulverizer.PulverizerTile;
+import ten3.core.machine.useenergy.quarry.QuarryTile;
 import ten3.core.machine.useenergy.smelter.FurnaceTile;
 import ten3.lib.tile.CmTileEntity;
 
@@ -29,6 +31,7 @@ public class TileInit {
     public static void regAll() {
         regTile(() -> new ExtractorTile("engine_extraction"));
         regTile(() -> new MetalizerTile("engine_metal"));
+        regTile(() -> new BiomassTile("engine_biomass"));
 
         regTile(() -> new FurnaceTile("machine_smelter"));
         regTile(() -> new FarmTile("machine_farm_manager"));
@@ -36,6 +39,7 @@ public class TileInit {
         regTile(() -> new CompressorTile("machine_compressor"));
         regTile(() -> new BeaconTile("machine_beacon_simulator"));
         regTile(() -> new MobRipTile("machine_mob_ripper"));
+        regTile(() -> new QuarryTile("machine_quarry"));
 
         regTile(() -> new CableTile("cable_glass"));
         regTile(() -> new CableTileGolden("cable_golden"));

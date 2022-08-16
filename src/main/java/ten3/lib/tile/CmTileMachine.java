@@ -2,7 +2,6 @@ package ten3.lib.tile;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -10,10 +9,10 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.math.BlockPos;
@@ -24,12 +23,12 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import ten3.TER;
+import ten3.TConst;
 import ten3.core.block.Machine;
 import ten3.core.block.MachinePostEvent;
 import ten3.core.item.upgrades.LevelupItem;
 import ten3.core.item.upgrades.UpgradeItem;
-import ten3.lib.tile.option.Level;
+import ten3.core.machine.cable.CableTile;
 import ten3.util.DireUtil;
 import ten3.lib.capability.energy.EnergyTransferor;
 import ten3.lib.capability.energy.FEStorageTile;
@@ -48,10 +47,14 @@ import java.util.*;
 
 public abstract class CmTileMachine extends CmTileEntity {
 
+    public boolean hasRecipe() {
+        return false;
+    }
+
     public int CHOOSE_TYPE = -1;
 
-    public final EnergyTransferor etr;
-    public final ItemTransferor itr;
+    public EnergyTransferor etr;
+    public ItemTransferor itr;
 
     public static int kFE(double k) {
         return (int) (1000 * k);
@@ -65,20 +68,22 @@ public abstract class CmTileMachine extends CmTileEntity {
     //data poses.
     //how to use them:
     //data.set(energy<-index, xxx<-value)
-    public static final int energy = 2;
-    public static final int maxEnergy = 3;
-    public static final int progress = 0;
-    public static final int maxProgress = 1;
-    public static final int fuel = 4;
-    public static final int maxFuel = 5;
-    public static final int receive = 6;
-    public static final int extract = 7;
+    public static final int ENERGY = 2;
+    public static final int MAX_ENERGY = 3;
+    public static final int PROGRESS = 0;
+    public static final int MAX_PROGRESS = 1;
+    public static final int FUEL = 4;
+    public static final int MAX_FUEL = 5;
+    public static final int E_REC = 6;
+    public static final int E_EXT = 7;
+    public static final int I_REC = 8;
+    public static final int I_EXT = 9;
 
-    public static final int redMode = 10;
-    public static final int facing = 11;
-    public static final int actualEff = 12;
-    public static final int efficient = 13;
-    public static final int level = 14;
+    public static final int RED_MODE = 10;
+    public static final int FACE = 11;
+    public static final int EFF_AUC = 12;
+    public static final int EFF = 13;
+    public static final int level = 15;
     //public static int tranMode = 11;
 
     public int efficientIn;
@@ -92,6 +97,8 @@ public abstract class CmTileMachine extends CmTileEntity {
     //canRewrite
     public int maxReceive;
     public int maxExtract;
+    public int maxReceiveItem;
+    public int maxExtractItem;
     public int maxStorage;
     public int defaultModeEne;
     public int defaultModeItm;
@@ -100,6 +107,8 @@ public abstract class CmTileMachine extends CmTileEntity {
     public int initialStorage;//initial vars won't be change!
     public int initialReceive;//initial vars won't be change!
     public int initialExtract;//initial vars won't be change!
+    public int initialItemReceive;
+    public int initialItemExtract;
     public int initialFacing;
 
     public int upgSlotFrom = 34;
@@ -109,8 +118,16 @@ public abstract class CmTileMachine extends CmTileEntity {
     public Progressor progressor = new Progressor();
 
     public CmTileMachine(String key) {
-
         super(key);
+        constructorDo();
+    }
+
+    CmTileMachine(TileEntityType<?> type, String fullTranslationKey) {
+        super(type, fullTranslationKey);
+        constructorDo();
+    }
+
+    private void constructorDo() {
         fact = CmContainerMachine::new;
 
         etr = new EnergyTransferor(this);
@@ -123,17 +140,18 @@ public abstract class CmTileMachine extends CmTileEntity {
         addSlot(new SlotUpgCm(inventory, 37, 89, -28));
         addSlot(new SlotUpgCm(inventory, 38, 108, -28));
         addSlot(new SlotUpgCm(inventory, 39, 127, -28));
-
     }
 
-    public void setCap(int rc, int ex, int store, int defene, int defitm, int eff) {
+    public void setCap(int store, int defene, int defitm, int eff) {
 
-        initialReceive = maxReceive = rc;
-        initialExtract = maxExtract = ex;
+        initialReceive = maxReceive = typeOf() == Type.CABLE ? store : store / 200;
+        initialExtract = maxExtract = typeOf() == Type.CABLE ? store : store / 200;
         initialStorage = maxStorage = store;
         defaultModeEne = defene;
         defaultModeItm = defitm;
         initialEfficientIn = efficientIn = eff;
+        initialItemExtract = maxExtractItem = 1;
+        initialItemReceive = maxReceiveItem = 1;
 
     }
 
@@ -159,7 +177,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     public void packets() {
 
         for(Direction d : Direction.values()) {
-            MachinePostEvent.updateToClient(direCheckEnergy(d), direCheckItem(d), data.get(redMode), levelIn, pos, d);
+            MachinePostEvent.updateToClient(direCheckEnergy(d), direCheckItem(d), data.get(RED_MODE), levelIn, pos, d);
         }
 
     }
@@ -205,7 +223,7 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     public ITextComponent getDisplayWith() {
 
-        return KeyUtil.translated(TER.modid + "." + id, TER.modid + ".level." + levelIn);
+        return KeyUtil.translated(TConst.modid + "." + id, TConst.modid + ".level." + levelIn);
 
     }
 
@@ -247,6 +265,8 @@ public abstract class CmTileMachine extends CmTileEntity {
                 }
                 else {
                     efficientIn = initialEfficientIn;
+                    maxExtractItem = initialItemExtract;
+                    maxReceiveItem = initialItemReceive;
                     maxExtract = initialExtract;
                     maxReceive = initialReceive;
                     maxStorage = initialStorage;//reset all, but data storage them to client!
@@ -277,25 +297,27 @@ public abstract class CmTileMachine extends CmTileEntity {
         component = getDisplayWith();
 
         //to client
-        data.set(maxEnergy, maxStorage);
-        data.set(receive, maxReceive);
-        data.set(extract, maxExtract);
-        data.set(efficient, efficientIn);
+        data.set(MAX_ENERGY, maxStorage);
+        data.set(E_REC, maxReceive);
+        data.set(E_EXT, maxExtract);
+        data.set(EFF, efficientIn);
+        data.set(I_REC, maxReceiveItem);
+        data.set(I_EXT, maxExtractItem);
         data.set(level, levelIn);
 
-        data.set(facing, initialFacing);
+        data.set(FACE, initialFacing);
         setFace(DireUtil.intToDire(initialFacing));
 
         //avoid out of cap
-        if(data.get(energy) > maxStorage) {
-            data.set(energy, maxStorage);
+        if(data.get(ENERGY) > maxStorage) {
+            data.set(ENERGY, maxStorage);
         }
 
         //set actual efficientIn
         if(getTileAliveTime() % 4 == 0) {
             CHOOSE_TYPE = -1;//post to client render
             actualEffPercent = EfficientCalculator.gen(typeOf(), data);
-            data.set(actualEff, (int) (actualEffPercent * efficientIn));
+            data.set(EFF_AUC, (int) (actualEffPercent * efficientIn));
         }
 
         setActive(getActualPercent() > 0 && checkCanRun());
@@ -327,7 +349,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     }
 
     protected void transferItem() {
-        if(getTileAliveTime() % 10 == 0) {
+        if(getTileAliveTime() % 2 == 0) {
             qr.offer(qr.remove());
             for(Direction d : qr) {
                 itr.transferTo(d);
@@ -346,7 +368,7 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     public int getActual() {
 
-        return data.get(actualEff);
+        return data.get(EFF_AUC);
 
     }
 
@@ -404,7 +426,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     public boolean checkCanRun() {
         boolean power = world.isBlockPowered(pos);
 
-        switch(data.get(redMode)) {
+        switch(data.get(RED_MODE)) {
             case RedstoneMode.LOW:
                 return !power;
             case RedstoneMode.HIGH:
@@ -418,24 +440,27 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     public boolean energySupportRun() {
 
-        if(typeOf() == Type.MACHINE_PROCESS) return data.get(energy) >= efficientIn;
-        if(typeOf() == Type.MACHINE_EFFECT) return data.get(energy) >= efficientIn;
-        if(typeOf() == Type.GENERATOR) return data.get(energy) + getActual() <= maxStorage;
+        if(typeOf() == Type.MACHINE_PROCESS) return data.get(ENERGY) >= efficientIn;
+        if(typeOf() == Type.MACHINE_EFFECT) return data.get(ENERGY) >= efficientIn;
+        if(typeOf() == Type.GENERATOR) return data.get(ENERGY) + getActual() <= maxStorage;
         return true;
 
     }
 
-    public boolean effectApplyTickOn(double min, double max) {
+    //use second, not tick.
+    public boolean effectApplyTickOnScd(double min, double max) {
 
         min *= 20;
         max *= 20;//s
 
-         if(typeOf() != Type.MACHINE_EFFECT) return true;
+        if(typeOf() != Type.MACHINE_EFFECT) return true;
 
-         int k22 = ((int) ((1 - getActualPercent()) * max + min * (1 - efficientIn / (double)initialEfficientIn)));
-         if(k22 <= 0) return true;
+        double times = efficientIn / (double) initialEfficientIn;
 
-         return getTileAliveTime() % k22 == 0;
+        //IMP"(int)",->cannot run
+        if(times <= 1) return getTileAliveTime() % (int) (max * (1 - times) + min) == 0;
+        else if(times > 1 && times < 2) return getTileAliveTime() % (int) ((1 - (times - 1)) * min) == 0;
+        else return times > 2;
 
     }
 

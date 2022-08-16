@@ -12,6 +12,20 @@ public class IntArrayCm extends IntArray {
         set(i, get(i) + m);
     }
 
+    public void translate(int i, int m, int minOrMax) {
+        set(i, get(i) + m);
+        if(m < 0) {
+            if(get(i) < minOrMax) {
+                set(i, minOrMax);
+            }
+        }
+        else if(m > 0) {
+            if(get(i) > minOrMax) {
+                set(i, minOrMax);
+            }
+        }
+    }
+
     public void translateCycle(int i, int max) {
         int p = get(i) + 1;
 

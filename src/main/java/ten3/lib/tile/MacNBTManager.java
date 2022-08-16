@@ -1,10 +1,7 @@
 package ten3.lib.tile;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import ten3.lib.wrapper.IntArrayCm;
-
-import java.util.Map;
 
 import static ten3.lib.tile.CmTileMachine.*;
 
@@ -24,14 +21,14 @@ public class MacNBTManager {
 
     public void rdt(CompoundNBT nbt) {
 
-        data.set(progress, nbt.getInt("progress"));
-        data.set(maxProgress, nbt.getInt("maxProgress"));
-        data.set(energy, nbt.getInt("energy"));
-        data.set(maxEnergy, nbt.getInt("maxEnergy"));
-        data.set(fuel, nbt.getInt("fuel"));
-        data.set(maxFuel, nbt.getInt("maxFuel"));
+        data.set(PROGRESS, nbt.getInt("progress"));
+        data.set(MAX_PROGRESS, nbt.getInt("maxProgress"));
+        data.set(ENERGY, nbt.getInt("energy"));
+        data.set(MAX_ENERGY, nbt.getInt("maxEnergy"));
+        data.set(FUEL, nbt.getInt("fuel"));
+        data.set(MAX_FUEL, nbt.getInt("maxFuel"));
 
-        data.set(redMode, nbt.getInt("redstoneMode"));
+        data.set(RED_MODE, nbt.getInt("redstoneMode"));
 
         readNBTUpg(nbt);
 
@@ -46,14 +43,14 @@ public class MacNBTManager {
 
     public void wdt(CompoundNBT nbt) {
 
-        nbt.putInt("progress", data.get(progress));
-        nbt.putInt("maxProgress", data.get(maxProgress));
-        nbt.putInt("energy", data.get(energy));
-        nbt.putInt("maxEnergy", data.get(maxEnergy));
-        nbt.putInt("fuel", data.get(fuel));
-        nbt.putInt("maxFuel", data.get(maxFuel));
+        nbt.putInt("progress", data.get(PROGRESS));
+        nbt.putInt("maxProgress", data.get(MAX_PROGRESS));
+        nbt.putInt("energy", data.get(ENERGY));
+        nbt.putInt("maxEnergy", data.get(MAX_ENERGY));
+        nbt.putInt("fuel", data.get(FUEL));
+        nbt.putInt("maxFuel", data.get(MAX_FUEL));
 
-        nbt.putInt("redstoneMode", data.get(redMode));
+        nbt.putInt("redstoneMode", data.get(RED_MODE));
 
         writeNBTUpg(nbt);
 

@@ -12,7 +12,7 @@ import ten3.util.PatternUtil;
 
 import java.util.List;
 
-import static ten3.lib.tile.CmTileMachine.energy;
+import static ten3.lib.tile.CmTileMachine.ENERGY;
 
 public class EnergyItemHelper {
 
@@ -63,7 +63,7 @@ public class EnergyItemHelper {
 
     public static ItemStack fromMachine(CmTileMachine tile, ItemStack stack) {
 
-        ItemUtil.setTag(stack, "energy", tile.data.get(energy));
+        ItemUtil.setTag(stack, "energy", tile.data.get(ENERGY));
         tile.nbtManager.writeNBTUpg(stack.getOrCreateTag());
 
         for(int i = tile.upgSlotFrom; i <= tile.upgSlotTo; i++) {
@@ -76,7 +76,7 @@ public class EnergyItemHelper {
 
     public static void pushToTile(CmTileMachine tile, ItemStack stack) {
 
-        tile.data.set(energy, ItemUtil.getTag(stack, "energy"));
+        tile.data.set(ENERGY, ItemUtil.getTag(stack, "energy"));
         tile.nbtManager.readNBTUpg(stack.getOrCreateTag());
 
         for(int i = tile.upgSlotFrom; i <= tile.upgSlotTo; i++) {

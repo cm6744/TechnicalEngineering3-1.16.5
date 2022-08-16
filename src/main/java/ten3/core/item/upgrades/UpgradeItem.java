@@ -21,12 +21,4 @@ public abstract class UpgradeItem extends DefItem {
 
     public abstract boolean effect(CmTileMachine tile);
 
-    @Deprecated
-    public void reset(CmTileMachine tile) {}
-
-    @Deprecated
-    public int limit() {
-        return 0;
-    }
-
 }

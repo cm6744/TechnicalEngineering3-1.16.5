@@ -18,7 +18,7 @@ public class CableTile extends CmTileMachine {
 
         super(name);
 
-        setCap(getCapacity(), getCapacity(), getCapacity(), FaceOption.BOTH, FaceOption.OFF, getCapacity());
+        setCap(getCapacity(), FaceOption.BOTH, FaceOption.OFF, getCapacity());
 
     }
 

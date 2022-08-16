@@ -1,26 +1,19 @@
 package ten3.lib.tile.recipe;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import ten3.core.machine.engine.MatchFuel;
-import ten3.core.recipe.OpportunityRecipe;
 import ten3.lib.tile.CmTileMachine;
-import ten3.lib.tile.option.FaceOption;
 import ten3.lib.tile.option.Type;
-
-import javax.annotation.Nonnull;
+import ten3.lib.wrapper.SlotCustomCm;
 
 public abstract class CmTileEngine extends CmTileMachine {
 
     public CmTileEngine(String name) {
         super(name);
+        addSlot(new SlotCustomCm(inventory, 0, 42, 36,
+                (s) -> matchFuelAndShrink(s, true) > 0, false, true));
     }
 
     @Override
@@ -38,15 +31,15 @@ public abstract class CmTileEngine extends CmTileMachine {
         if(energySupportRun()) {
             ItemStack ext = inventory.getStackInSlot(0);
 
-            if(data.get(fuel) > 0) {
-                data.translate(energy, getActual());//up energy
-                data.translate(fuel, -getActual());//down fuel
+            if(data.get(FUEL) > 0) {
+                data.translate(ENERGY, getActual(), maxStorage);//up energy
+                data.translate(FUEL, -getActual(), 0);//down fuel
             }
             else {
-                int fuel_p = matchFuelAndShrink(ext, true);
+                int fuel_p = matchFuelAndShrink(ext, false);
                 if(fuel_p > 0) {
-                    data.set(fuel, fuel_p);
-                    data.set(maxFuel, fuel_p);
+                    data.set(FUEL, fuel_p);
+                    data.set(MAX_FUEL, fuel_p);
                 }
             }
         }

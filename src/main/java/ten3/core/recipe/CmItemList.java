@@ -24,6 +24,14 @@ public class CmItemList {
     List<Item> matches;
     ResourceLocation loc;
 
+    public List<ItemStack> stackLstOf() {
+        List<ItemStack> ss = new ArrayList<>();
+        for(Item i : matches) {
+            ss.add(i.getDefaultInstance());
+        }
+        return ss;
+    }
+
     public CmItemList(Item s, ResourceLocation rl) {
         matches = Lists.newArrayList(s);
         type = "item";

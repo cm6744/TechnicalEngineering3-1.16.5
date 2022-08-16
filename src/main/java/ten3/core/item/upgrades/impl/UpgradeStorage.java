@@ -13,16 +13,4 @@ public class UpgradeStorage extends UpgradeItem {
 
     }
 
-    @Override
-    public void reset(CmTileMachine tile) {
-
-        tile.maxExtract -= tile.initialStorage;
-
-    }
-
-    @Override
-    public int limit() {
-        return 2;
-    }
-
 }

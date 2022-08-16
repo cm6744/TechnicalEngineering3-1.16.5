@@ -15,9 +15,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import ten3.TechnicalEngineering;
 import ten3.core.machine.cell.CellTileGolden;
-import ten3.core.machine.engine.extractor.ExtractorScreen;
+import ten3.core.machine.engine.EngineScreen;
+import ten3.core.machine.engine.biomass.BiomassTile;
 import ten3.core.machine.engine.extractor.ExtractorTile;
-import ten3.core.machine.engine.metalizer.MetalizerScreen;
 import ten3.core.machine.engine.metalizer.MetalizerTile;
 import ten3.core.machine.cell.CellScreen;
 import ten3.core.machine.cell.CellTile;
@@ -31,9 +31,12 @@ import ten3.core.machine.useenergy.mobrip.MobRipScreen;
 import ten3.core.machine.useenergy.mobrip.MobRipTile;
 import ten3.core.machine.useenergy.pulverizer.PulverizerScreen;
 import ten3.core.machine.useenergy.pulverizer.PulverizerTile;
+import ten3.core.machine.useenergy.quarry.QuarryScreen;
+import ten3.core.machine.useenergy.quarry.QuarryTile;
 import ten3.core.machine.useenergy.smelter.FurnaceScreen;
 import ten3.core.machine.useenergy.smelter.FurnaceTile;
 import ten3.lib.tile.CmContainerMachine;
+import ten3.lib.tile.CmScreen;
 import ten3.lib.tile.CmTileMachine;
 import ten3.lib.wrapper.IntArrayCm;
 
@@ -51,12 +54,15 @@ public class ContInit {
     public static void regAll() {
         regCont(new ExtractorTile("engine_extraction"));
         regCont(new MetalizerTile("engine_metal"));
+        regCont(new BiomassTile("engine_biomass"));
+
         regCont(new FurnaceTile("machine_smelter"));
         regCont(new FarmTile("machine_farm_manager"));
         regCont(new PulverizerTile("machine_pulverizer"));
         regCont(new CompressorTile("machine_compressor"));
         regCont(new BeaconTile("machine_beacon_simulator"));
         regCont(new MobRipTile("machine_mob_ripper"));
+        regCont(new QuarryTile("machine_quarry"));
 
         regCont(new CellTile("cell_glass"));
         regCont(new CellTileGolden("cell_golden"));
@@ -103,15 +109,19 @@ public class ContInit {
 
         cutout.add("engine_metal");
         cutout.add("engine_extraction");
+        cutout.add("engine_biomass");
 
-        bindScr("engine_metal", MetalizerScreen::new);
-        bindScr("engine_extraction", ExtractorScreen::new);
+        bindScr("engine_metal", EngineScreen::new);
+        bindScr("engine_extraction", EngineScreen::new);
+        bindScr("engine_biomass", EngineScreen::new);
+
         bindScr("machine_smelter", FurnaceScreen::new);
         bindScr("machine_farm_manager", FarmScreen::new);
         bindScr("machine_pulverizer", PulverizerScreen::new);
         bindScr("machine_compressor", CompressorScreen::new);
         bindScr("machine_beacon_simulator", BeaconScreen::new);
         bindScr("machine_mob_ripper", MobRipScreen::new);
+        bindScr("machine_quarry", QuarryScreen::new);
 
         bindScr("cell_glass", CellScreen::new);
         bindScr("cell_golden", CellScreen::new);

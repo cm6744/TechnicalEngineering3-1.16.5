@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:gold_ingot",
     "ten3:powered_tin_ingot",
     "ten3:chlorium_ingot"
   ]

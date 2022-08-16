@@ -28,6 +28,7 @@ public class BlockInit {
 
         regEngine("engine_extraction");
         regEngine("engine_metal");
+        regEngine("engine_biomass");
 
         regMachine("smelter");
         regMachine("farm_manager");
@@ -35,6 +36,7 @@ public class BlockInit {
         regMachine("compressor");
         regMachine("beacon_simulator");
         regMachine("mob_ripper");
+        regMachine("quarry");
 
         regCable("cable_glass", Material.GLASS, SoundType.GLASS);
         regCable("cable_golden", Material.IRON, SoundType.STONE);

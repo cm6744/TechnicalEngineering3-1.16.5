@@ -3,7 +3,7 @@ package ten3.init;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
-import ten3.TER;
+import ten3.TConst;
 import ten3.TechnicalEngineering;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class SoundInit {
 
     public static void regSound(String id) {
 
-        ResourceLocation rl = new ResourceLocation(TER.modid, id);
+        ResourceLocation rl = new ResourceLocation(TConst.modid, id);
         regSound(id, new SoundEvent(rl));
 
     }

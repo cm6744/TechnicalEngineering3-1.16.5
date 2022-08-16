@@ -144,6 +144,7 @@ public class StarlightBase extends DefBlock {
                     if(worldIn.getBlockState(pin).matchesBlock(cry)) {
                         num[0]++;
                     }
+                    return false;
         });
 
         if(num[0] >= 2) return;

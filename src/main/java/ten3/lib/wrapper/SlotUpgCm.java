@@ -9,7 +9,6 @@ import ten3.core.client.ClientHolder;
 import ten3.core.item.upgrades.LevelupItem;
 import ten3.core.item.upgrades.UpgradeItem;
 import ten3.core.network.Network;
-import ten3.core.network.packets.PTSUpgradeOffPack;
 import ten3.lib.capability.item.InventoryCm;
 import ten3.lib.tile.CmTileMachine;
 import ten3.util.ExcUtil;

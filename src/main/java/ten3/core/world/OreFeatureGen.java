@@ -15,12 +15,12 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import ten3.TER;
+import ten3.TConst;
 import ten3.init.BlockInit;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = TER.modid, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = TConst.modid, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class OreFeatureGen {
 
     public static final ConfiguredFeature<?, ?> tin_ore = register(

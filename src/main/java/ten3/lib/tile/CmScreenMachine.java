@@ -41,6 +41,10 @@ public class CmScreenMachine extends CmScreen<CmContainerMachine> {
     protected ElementButton upglock_5;
     protected ElementButton upglock_6;
 
+    public ElementBurnLeft getDefaultEne() {
+        return new ElementBurnLeft(9, 18, 14, 46, 0, 0, handler, true);
+    }
+
     @Override
     public void addWidgets() {
 
@@ -85,7 +89,7 @@ public class CmScreenMachine extends CmScreen<CmContainerMachine> {
 
     private void cycleModeRed() {
 
-        int m = container.data.get(redMode);
+        int m = container.data.get(RED_MODE);
 
         m++;
         if(m > RedstoneMode.HIGH) {
@@ -102,19 +106,21 @@ public class CmScreenMachine extends CmScreen<CmContainerMachine> {
 
         super.tick();
 
-        rs_button_high.setVisible(container.data.get(redMode) == RedstoneMode.HIGH);
-        rs_button_low.setVisible(container.data.get(redMode) == RedstoneMode.LOW);
-        rs_button_off.setVisible(container.data.get(redMode) == RedstoneMode.OFF);
+        rs_button_high.setVisible(container.data.get(RED_MODE) == RedstoneMode.HIGH);
+        rs_button_low.setVisible(container.data.get(RED_MODE) == RedstoneMode.LOW);
+        rs_button_off.setVisible(container.data.get(RED_MODE) == RedstoneMode.OFF);
 
         //rs_button_off.setVisible(bar_redstone.isOpen());
         //rs_button_low.setVisible(bar_redstone.isOpen());
         //rs_button_high.setVisible(bar_redstone.isOpen());
 
         bar_energy.update(
-                container.data.get(actualEff),
-                container.data.get(efficient),
-                container.data.get(receive),
-                container.data.get(extract)
+                container.data.get(EFF_AUC),
+                container.data.get(EFF),
+                container.data.get(E_REC),
+                container.data.get(E_EXT),
+                container.data.get(I_REC),
+                container.data.get(I_EXT)
         );
 
         upglock_1.state = container.data.get(level) >= Level.COMMON;

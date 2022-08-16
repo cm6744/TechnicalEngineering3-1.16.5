@@ -61,13 +61,16 @@
   "ten3.redstone_converter": "Redstone Converter",
 
   "ten3.engine_extraction": "Extraction Engine",
-  "ten3.machine_farm_manager": "Farm Manager",
   "ten3.engine_metal": "Metal Engine",
+  "ten3.engine_biomass": "Biomass Engine",
+
+  "ten3.machine_farm_manager": "Farm Manager",
   "ten3.machine_smelter": "Smelter",
   "ten3.machine_pulverizer": "Pulverizer",
   "ten3.machine_compressor": "Compressor",
   "ten3.machine_beacon_simulator": "Beacon Simulator",
   "ten3.machine_mob_ripper": "Mob Ripper",
+  "ten3.machine_quarry": "Quarry",
 
   "ten3.cell_glass": "Glass Energy Cell",
   "ten3.cell_golden": "Golden Energy Cell",
@@ -120,7 +123,7 @@
   "ten3.info.mode.0": "Energy",
   "ten3.info.mode.1": "Item",
   "ten3.info.mode.2": "Redstone",
-  "ten3.info.mode.3": "Downgrade",
+  "ten3.info.mode.3": "Range",
   "ten3.info.mode.4": "Destroy",
 
   "ten3.info.in": "Initiative Input",
@@ -140,12 +143,12 @@
   "ten3.info.bar_upgrade": "Upgrades: ",
   "ten3.info.bar_energy_fact": "Actual Efficient: ",
   "ten3.info.bar_energy_max": "Max Efficient: ",
-  "ten3.info.bar_energy_in_max": "Max Input Efficient: ",
-  "ten3.info.bar_energy_out_max": "Max Output Efficient: ",
+  "ten3.info.bar_energy_in_max": "Max Energy Input Efficient: ",
+  "ten3.info.bar_energy_out_max": "Max Energy Output Efficient: ",
+  "ten3.info.bar_item_in_max": "Max Item Input Efficient: ",
+  "ten3.info.bar_item_out_max": "Max Item Output Efficient: ",
   "ten3.locked_slot": "This slot hasn't been unlocked yet.",
-
-  "ten3.info.engine_extraction.0": "A Common Generator.",
-  "ten3.info.engine_extraction.1": "Extract Energy from fuel.",
+  "ten3.jei_addition_chance": "Addition Chance: ",
 
   "ten3.info.smelter.0": "Turn energy into heats.",
   "ten3.info.smelter.1": "Provide higher speed than Furnace.",
@@ -162,17 +165,26 @@
   "ten3.info.cell.0": "Storage plenty of energy.",
   "ten3.info.cell.1": "Also, it has the ability to charge items.",
 
+  "ten3.info.mob_ripper.0": "Attack mobs in a range.",
+  "ten3.info.mob_ripper.1": "Consider offering a netherite sword?",
+
   "ten3.info.beacon_simulator.0": "Expand potion effect to players in a area.",
   "ten3.info.beacon_simulator.1": "It needs a template of potion item.",
-  "ten3.info.beacon_simulator.2": "Brew a potion, use anytime ~",
+  "ten3.info.beacon_simulator.2": "Range will expand along with level.",
   "ten3.info.beacon_simulator.3": "And, Pay attention to your ENERGY!",
 
   "ten3.info.farm_manager.0": "Throw your farm work to it!",
   "ten3.info.farm_manager.1": "Give it some seeds, and they will be automatically planted.",
   "ten3.info.farm_manager.2": "Ripe crops will also be harvested.",
 
+  "ten3.info.engine_extraction.0": "A Common Generator.",
+  "ten3.info.engine_extraction.1": "Extract Energy from fuel.",
+
   "ten3.info.engine_metal.0": "Generate Energy by metal.",
   "ten3.info.engine_metal.1": "Throw all useless ingots into it, now!",
   "ten3.info.engine_metal.2": "Besides, Netherite can generate the most.",
-  "ten3.info.engine_metal.3": "But who will do that?"
+  "ten3.info.engine_metal.3": "But who will do that?",
+
+  "ten3.info.engine_biomass.0": "Reuse biomass energy.",
+  "ten3.info.engine_biomass.1": "Leaves, logs, plants, and so on...!"
 }

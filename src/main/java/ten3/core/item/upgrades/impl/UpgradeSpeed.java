@@ -8,21 +8,9 @@ public class UpgradeSpeed extends UpgradeItem {
 
     public boolean effect(CmTileMachine tile) {
 
-        tile.efficientIn += tile.initialEfficientIn;
+        tile.efficientIn += tile.initialEfficientIn * 0.25;
         return true;
 
-    }
-
-    @Override
-    public void reset(CmTileMachine tile) {
-
-        tile.efficientIn -= tile.initialEfficientIn;
-
-    }
-
-    @Override
-    public int limit() {
-        return 2;
     }
 
 }

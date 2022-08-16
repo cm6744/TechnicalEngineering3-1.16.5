@@ -4,7 +4,7 @@ import net.minecraft.util.Direction;
 import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.FaceOption;
 
-import static ten3.lib.tile.CmTileMachine.energy;
+import static ten3.lib.tile.CmTileMachine.ENERGY;
 
 public class FEStorageTile extends FEStorage {
 
@@ -43,17 +43,17 @@ public class FEStorageTile extends FEStorage {
 
     @Override
     public void translateEnergy(int diff) {
-        tile.data.translate(energy, diff);
+        tile.data.translate(ENERGY, diff);
     }
 
     @Override
     public void setEnergy(int diff) {
-        tile.data.set(energy, diff);
+        tile.data.set(ENERGY, diff);
     }
 
     @Override
     public int getEnergyStored() {
-        return tile.data.get(energy);
+        return tile.data.get(ENERGY);
     }
 
     @Override

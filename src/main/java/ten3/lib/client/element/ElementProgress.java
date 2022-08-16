@@ -32,7 +32,8 @@ public class ElementProgress extends ElementBase {
 
     @Override
     public void addToolTip(List<ITextComponent> tooltips) {
-        tooltips.add(new StringTextComponent((int)(p * 100) + "%"));
+        //for JEI, disabled
+        //tooltips.add(new StringTextComponent((int)(p * 100) + "%"));
     }
 
     int ie;

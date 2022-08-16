@@ -1,8 +1,7 @@
 package ten3.util;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
-import ten3.TER;
+import ten3.TConst;
 
 @OnlyCore
 public class KeyUtil {
@@ -10,7 +9,7 @@ public class KeyUtil {
     @OnlyCore
     public static String getKey(String s) {
 
-        String test = TER.modid + "." + s;
+        String test = TConst.modid + "." + s;
         return test;
 
     }

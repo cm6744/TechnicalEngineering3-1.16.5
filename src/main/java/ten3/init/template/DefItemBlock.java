@@ -3,7 +3,7 @@ package ten3.init.template;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
-import ten3.TER;
+import ten3.TConst;
 import ten3.init.tab.DefGroup;
 
 public class DefItemBlock extends BlockItem {
@@ -29,7 +29,7 @@ public class DefItemBlock extends BlockItem {
     @Override
     protected String getDefaultTranslationKey() {
 
-        return TER.modid + "." + getRegistryName().getPath();
+        return TConst.modid + "." + getRegistryName().getPath();
 
     }
 

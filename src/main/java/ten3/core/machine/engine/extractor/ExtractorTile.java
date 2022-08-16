@@ -14,9 +14,7 @@ public class ExtractorTile extends CmTileEngine {
 
         super(name);
 
-        setCap(kFE(0.2), kFE(0.2), kFE(60), FaceOption.OUT, FaceOption.IN, 30);
-
-        addSlot(new SlotCmFuel(inventory, 0, 42, 36, false, true));
+        setCap(kFE(60), FaceOption.OUT, FaceOption.IN, 30);
 
     }
 

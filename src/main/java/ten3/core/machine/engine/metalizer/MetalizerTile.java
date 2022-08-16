@@ -14,9 +14,7 @@ public class MetalizerTile extends CmTileEngine {
 
         super(name);
 
-        setCap(kFE(0.2), kFE(0.2), kFE(80), FaceOption.OUT, FaceOption.IN, 80);
-
-        addSlot(new SlotCustomCm(inventory, 0, 42, 36, (s) -> MatchFuel.matchFuelAndShrinkMetal(s, false) > 0, false, true));
+        setCap(kFE(80), FaceOption.OUT, FaceOption.IN, 80);
 
     }
 

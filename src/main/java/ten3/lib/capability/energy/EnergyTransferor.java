@@ -9,7 +9,7 @@ import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.FaceOption;
 import ten3.util.DireUtil;
 
-import static ten3.lib.tile.CmTileMachine.energy;
+import static ten3.lib.tile.CmTileMachine.ENERGY;
 
 @SuppressWarnings("all")
 public class EnergyTransferor {
@@ -49,9 +49,9 @@ public class EnergyTransferor {
             IEnergyStorage e = handlerOf(tile, DireUtil.safeOps(d));
             if(e == null) return;
             if(e.canReceive()) {
-                int diff = e.receiveEnergy(Math.min(v, t.data.get(energy)), false);
+                int diff = e.receiveEnergy(Math.min(v, t.data.get(ENERGY)), false);
                 if(diff != 0) {
-                    t.data.translate(energy, -diff);
+                    t.data.translate(ENERGY, -diff);
                     t.markDirty();
                 }
             }
@@ -70,9 +70,9 @@ public class EnergyTransferor {
             IEnergyStorage e = handlerOf(tile, DireUtil.safeOps(d));
             if(e == null) return;
             if(e.canExtract()) {
-                int diff = e.extractEnergy(Math.min(v, t.maxStorage - t.data.get(energy)), false);
+                int diff = e.extractEnergy(Math.min(v, t.maxStorage - t.data.get(ENERGY)), false);
                 if(diff != 0) {
-                    t.data.translate(energy, diff);
+                    t.data.translate(ENERGY, diff);
                     t.markDirty();
                 }
             }
@@ -115,7 +115,7 @@ public class EnergyTransferor {
 
         int size = getSizeCan();
 
-        int k = Math.min(v, t.data.get(energy));
+        int k = Math.min(v, t.data.get(ENERGY));
         if(v < size || size == 0) return;
 
         for(Direction d : Direction.values()) {
@@ -130,7 +130,7 @@ public class EnergyTransferor {
 
         int size = getSizeCan();
 
-        int k = Math.min(v, t.maxStorage - t.data.get(energy));
+        int k = Math.min(v, t.maxStorage - t.data.get(ENERGY));
         if(v < size || size == 0) return;
 
         for(Direction d : Direction.values()) {

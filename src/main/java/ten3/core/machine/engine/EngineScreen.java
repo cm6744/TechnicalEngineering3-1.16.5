@@ -1,14 +1,14 @@
-package ten3.core.machine.engine.metalizer;
+package ten3.core.machine.engine;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.text.ITextComponent;
+import ten3.lib.client.element.ElementBurnLeft;
 import ten3.lib.tile.CmContainerMachine;
 import ten3.lib.tile.CmScreenMachine;
-import ten3.lib.client.element.ElementBurnLeft;
 
-public class MetalizerScreen extends CmScreenMachine {
+public class EngineScreen extends CmScreenMachine {
 
-    public MetalizerScreen(CmContainerMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public EngineScreen(CmContainerMachine screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 
         super(screenContainer, inv, titleIn, "textures/gui/engine.png", 256, 256);
         xSize = 176;

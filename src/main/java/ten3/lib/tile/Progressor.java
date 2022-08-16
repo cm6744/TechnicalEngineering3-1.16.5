@@ -2,8 +2,8 @@ package ten3.lib.tile;
 
 import ten3.lib.wrapper.IntArrayCm;
 
-import static ten3.lib.tile.CmTileMachine.maxProgress;
-import static ten3.lib.tile.CmTileMachine.progress;
+import static ten3.lib.tile.CmTileMachine.MAX_PROGRESS;
+import static ten3.lib.tile.CmTileMachine.PROGRESS;
 
 public class Progressor {
 
@@ -12,17 +12,17 @@ public class Progressor {
 
     public void progressOn(IntArrayCm data, int eff) {
 
-            int max = data.get(maxProgress);
+            int max = data.get(MAX_PROGRESS);
             timeProgressSpeed = max * eff * 0.0003 + 0.2;
 
             if(timeProgressSpeed >= 1) {
-                data.translate(progress, (int) timeProgressSpeed);
+                data.translate(PROGRESS, (int) timeProgressSpeed);
             }
             else {
                 stressedProgress += timeProgressSpeed;
                 if(stressedProgress >= 1) {
                     stressedProgress -= 1;
-                    data.translate(progress, 1);
+                    data.translate(PROGRESS, 1);
                 }
             }
 

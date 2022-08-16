@@ -4,11 +4,16 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -17,39 +22,33 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ten3.lib.tile.option.RedstoneMode;
-import ten3.util.DireUtil;
-import ten3.util.ExcUtil;
-import ten3.util.ItemUtil;
+import ten3.lib.tile.recipe.CmTileMachineRadiused;
+import ten3.util.*;
 import ten3.core.item.Spanner;
 import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.FaceOption;
 import ten3.lib.client.RenderHelper;
-import ten3.util.KeyUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
-public class HudSpanner extends AbstractGui {
+public class HudSpanner {
 
-    int w;
-    int h;
+    static int w;
+    static int h;
 
-    HudSpanner() {
+    static void render(boolean catchIt, PlayerEntity player, MatrixStack s, BlockPos pos, TileEntity t, Direction d) {
 
         w = Minecraft.getInstance().getMainWindow().getScaledWidth();
         h = Minecraft.getInstance().getMainWindow().getScaledHeight();
-
-    }
-
-    void render(boolean catchIt, PlayerEntity player, MatrixStack s, BlockPos pos, TileEntity t, Direction d) {
 
         s.push();
 
         ITextComponent tc = KeyUtil.translated("ten3.info.spanner.mode", "ten3.info.mode." + ItemUtil.getTag(player.getHeldItemMainhand(), "mode"));
 
         int hp = player.isCreative() ? (int) (h / 3 * 2.6) : (int) (h / 3 * 2.42);
-        //RenderHelper.render(s, w / 2 - 29, hp - 3, 58, 13, 256, 256, 0, 198, TER.guiHandler);
+        //RenderHelper.render(s, w / 2 - 29, hp - 3, 58, 13, 256, 256, 0, 198, TConst.guiHandler);
         RenderHelper.renderCString(s, w / 2, hp, ExcUtil.safeInt(KeyUtil.GOLD.getColor()), tc);
 
         if(!catchIt) return;
@@ -104,7 +103,8 @@ public class HudSpanner extends AbstractGui {
         PlayerEntity player = Minecraft.getInstance().player;
         if(player == null) return;
 
-        if(!(player.getHeldItemMainhand().getItem() instanceof Spanner)) return;
+        ItemStack i = player.getHeldItemMainhand();
+        if(!(i.getItem() instanceof Spanner)) return;
 
         if(e.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
 
@@ -113,11 +113,42 @@ public class HudSpanner extends AbstractGui {
         RayTraceResult result = Minecraft.getInstance().objectMouseOver;
         if(result instanceof BlockRayTraceResult) {
             BlockRayTraceResult r = (BlockRayTraceResult) result;
+
             Direction d = r.getFace();
-            BlockPos p = r.getPos();
-            //System.out.println(p.toString());
-            TileEntity t = world.getTileEntity(p);
-            new HudSpanner().render(t instanceof CmTileMachine, player, e.getMatrixStack(), p, t, d);
+            BlockPos hitPos = r.getPos();
+            if(!world.getBlockState(hitPos).isSolid()) {
+                hitPos = hitPos.down();
+            }
+            TileEntity t = world.getTileEntity(hitPos);
+            render(t instanceof CmTileMachine, player, e.getMatrixStack(), hitPos, t, d);
+
+            if(r.getType() == RayTraceResult.Type.MISS) return;//if miss, return!
+
+            BlockPos biPos = new BlockPos(
+                    ItemUtil.getTag(i, "bindX"),
+                    ItemUtil.getTag(i, "bindY"),
+                    ItemUtil.getTag(i, "bindZ")
+            );
+            TileEntity t2 = world.getTileEntity(biPos);
+
+            if(t2 instanceof CmTileMachineRadiused) {
+                CmTileMachineRadiused ttr = (CmTileMachineRadiused) t2;
+                int rad = ttr.getRadiusFromLevel(ExcUtil.safeInt(ClientHolder.level.get(biPos)));
+                if(biPos.withinDistance(hitPos, rad)) {
+                    WorkUtil.runInFlat(3, hitPos, (pin) -> {
+                        if(pin.withinDistance(biPos, rad) && Math.random() < 0.3) {
+                            ParticleSpawner.spawnClt(ParticleSpawner.RANGE,
+                                    pin.getX() + Math.random(),
+                                    pin.getY() + 1.2,
+                                    pin.getZ() + Math.random(),
+                                    0
+                            );
+                        }
+                        return false;
+                    });
+
+                }
+            }
         }
 
     }

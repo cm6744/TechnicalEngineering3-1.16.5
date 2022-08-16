@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.ToolType;
@@ -20,8 +21,6 @@ import ten3.util.ItemUtil;
 import javax.annotation.Nullable;
 
 public class Spanner extends DefItem {
-
-    public static int modes = 4;
 
     public Spanner() {
 
@@ -46,18 +45,44 @@ public class Spanner extends DefItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
-        if(playerIn.isSneaking() && handIn == Hand.MAIN_HAND && !worldIn.isRemote()) {
-            int i = ItemUtil.getTag(playerIn.getHeldItemMainhand(), "mode");
-            i++;
-            if(i > 2) {
-                i = 0;
+        if(handIn == Hand.MAIN_HAND && !worldIn.isRemote()) {
+            if(playerIn.isSneaking()) {
+                ItemStack stack = playerIn.getHeldItemMainhand();
+                int i = ItemUtil.getTag(stack, "mode");
+                i++;
+                if(i >= Modes.size()) {
+                    i = 0;
+                }
+                ItemUtil.setTag(stack, "mode", i);
+                ItemUtil.setTag(stack, "bindX", Integer.MAX_VALUE);
+                ItemUtil.setTag(stack, "bindY", Integer.MAX_VALUE);
+                ItemUtil.setTag(stack, "bindZ", Integer.MAX_VALUE);
+                return ActionResult.resultSuccess(playerIn.getHeldItemMainhand());
             }
-            ItemUtil.setTag(playerIn.getHeldItemMainhand(), "mode", i);
-            return ActionResult.resultSuccess(playerIn.getHeldItemMainhand());
         }
 
         return ActionResult.resultFail(playerIn.getHeldItemMainhand());
 
+    }
+
+    public enum Modes {
+        ENERGY(0),
+        ITEM(1),
+        REDSTONE(2),
+        RANGE(3);
+
+        int index;
+        Modes(int index) {
+            this.index = index;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public static int size() {
+            return 4;
+        }
     }
 
 }

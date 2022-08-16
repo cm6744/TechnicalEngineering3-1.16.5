@@ -20,8 +20,6 @@ import ten3.util.ItemUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static ten3.lib.tile.CmTileMachine.energy;
-
 public class BlockItemFEStorage extends DefItemBlock {
 
     //in game item do

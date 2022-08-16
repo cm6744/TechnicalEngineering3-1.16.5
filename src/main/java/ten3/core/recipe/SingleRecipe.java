@@ -1,5 +1,7 @@
 package ten3.core.recipe;
 
+import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,6 +12,10 @@ import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import ten3.init.RecipeInit;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SingleRecipe implements OpportunityRecipe<IInventory> {
 
@@ -60,11 +66,25 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     }
 
     @Override
-    public ItemStack additionalOutput() {
-        if(Math.random() < chance) {
-            return addition.copy();
-        }
-        return ItemStack.EMPTY;
+    public ItemStack getAdditionOutput()
+    {
+        return addition;
+    }
+
+    @Override
+    public List<ItemStack> input()
+    {
+        return ingredient.stackLstOf();
+    }
+
+    public List<ItemStack> output() {
+        return Lists.newArrayList(getRecipeOutput().copy());
+    }
+
+    @Override
+    public double chance()
+    {
+        return chance;
     }
 
     @Override

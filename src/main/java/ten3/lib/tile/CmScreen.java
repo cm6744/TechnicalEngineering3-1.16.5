@@ -7,7 +7,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import org.lwjgl.glfw.GLFW;
-import ten3.TER;
+import ten3.TConst;
 import ten3.lib.client.GuiHelper;
 import ten3.lib.client.RenderHelper;
 import ten3.lib.client.element.ElementBase;
@@ -21,7 +21,7 @@ import static ten3.lib.tile.CmTileMachine.*;
 public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
     //all widgets
-    public static final ResourceLocation handler = TER.guiHandler;
+    public static final ResourceLocation handler = TConst.guiHandler;
     public final ResourceLocation BG;
     protected int texh;
     protected int texw;
@@ -36,7 +36,7 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
         super(container, inv, titleIn);
         this.xSize = textureW;
         this.ySize = textureH;
-        BG = new ResourceLocation(TER.modid, path);
+        BG = new ResourceLocation(TConst.modid, path);
         texh = textureH;
         texw = textureW;
         this.container = container;
@@ -128,8 +128,8 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
         IIntArray data = getContainer().data;
 
-        if(data.get(maxFuel) != 0) {
-            return ((double) data.get(fuel)) / data.get(maxFuel);
+        if(data.get(MAX_FUEL) != 0) {
+            return ((double) data.get(FUEL)) / data.get(MAX_FUEL);
         }
 
         return 0;
@@ -140,8 +140,8 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
         IIntArray data = getContainer().data;
 
-        if(data.get(maxProgress) != 0) {
-            return ((double) data.get(progress)) / data.get(maxProgress);
+        if(data.get(MAX_PROGRESS) != 0) {
+            return ((double) data.get(PROGRESS)) / data.get(MAX_PROGRESS);
         }
 
         return 0;
@@ -152,8 +152,8 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
         IIntArray data = getContainer().data;
 
-        if(data.get(maxEnergy) != 0) {
-            return ((double) data.get(energy)) / data.get(maxEnergy);
+        if(data.get(MAX_ENERGY) != 0) {
+            return ((double) data.get(ENERGY)) / data.get(MAX_ENERGY);
         }
 
         return 0;
@@ -164,7 +164,7 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
         IIntArray data = getContainer().data;
 
-        return data.get(energy);
+        return data.get(ENERGY);
 
     }
 
@@ -172,7 +172,7 @@ public class CmScreen<T extends CmContainer> extends ContainerScreen<T> {
 
         IIntArray data = getContainer().data;
 
-        return data.get(maxEnergy);
+        return data.get(MAX_ENERGY);
 
     }
 

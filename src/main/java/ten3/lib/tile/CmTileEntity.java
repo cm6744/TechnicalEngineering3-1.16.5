@@ -10,9 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.text.ITextComponent;
-import ten3.TER;
+import ten3.TConst;
 import ten3.core.network.Network;
 import ten3.core.network.check.PTCCheckPack;
 import ten3.core.network.check.PTSCheckPack;
@@ -39,12 +40,14 @@ public abstract class CmTileEntity extends TileEntity implements ITickableTileEn
     }
 
     public CmTileEntity(String key) {
-
         super(TileInit.getType(key));
-
-        component = KeyUtil.translated(TER.modid + "." + key);
+        component = KeyUtil.translated(TConst.modid + "." + key);
         id = key;
+    }
 
+    CmTileEntity(TileEntityType<?> type, String fullTranslationKey) {
+        super(type);
+        component = KeyUtil.translated(fullTranslationKey);
     }
 
     public void rdt(CompoundNBT nbt) {}

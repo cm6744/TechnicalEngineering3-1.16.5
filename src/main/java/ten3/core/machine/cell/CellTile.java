@@ -13,7 +13,7 @@ public class CellTile extends CmTileMachine {
 
         super(name);
 
-        setCap(getCapacity() / 1000, getCapacity() / 1000, getCapacity(), FaceOption.BE_IN, FaceOption.OFF, 0);
+        setCap(getCapacity(), FaceOption.BE_IN, FaceOption.OFF, 0);
 
         addSlot(new SlotCm(inventory, 0, 61, 46, null, true, true));
         addSlot(new SlotCm(inventory, 1, 97, 46, null, true, true));
@@ -46,9 +46,9 @@ public class CellTile extends CmTileMachine {
             stack0.getCapability(CapabilityEnergy.ENERGY).ifPresent(
                     (e) -> {
                         if(e.canExtract()) {
-                            int diff = e.extractEnergy(Math.min(maxReceive, maxStorage - data.get(energy)), false);
+                            int diff = e.extractEnergy(Math.min(maxReceive, maxStorage - data.get(ENERGY)), false);
                             if(diff != 0) {
-                                data.translate(energy, diff);
+                                data.translate(ENERGY, diff);
                                 markDirty();
                             }
                         }
@@ -60,9 +60,9 @@ public class CellTile extends CmTileMachine {
             stack1.getCapability(CapabilityEnergy.ENERGY).ifPresent(
                     (e) -> {
                         if(e.canReceive()) {
-                            int diff = e.receiveEnergy(Math.min(maxExtract, data.get(energy)), false);
+                            int diff = e.receiveEnergy(Math.min(maxExtract, data.get(ENERGY)), false);
                             if(diff != 0) {
-                                data.translate(energy, -diff);
+                                data.translate(ENERGY, -diff);
                                 markDirty();
                             }
                         }

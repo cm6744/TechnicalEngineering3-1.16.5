@@ -72,12 +72,14 @@ public class ItemInit {
         //machines
         regItemMachineWithoutID("engine_extraction");
         regItemMachineWithoutID("engine_metal");
+        regItemMachineWithoutID("engine_biomass");
         regItemMachine("smelter");
         regItemMachine("farm_manager");
         regItemMachine("pulverizer");
         regItemMachine("compressor");
         regItemMachine("beacon_simulator");
         regItemMachine("mob_ripper");
+        regItemMachine("quarry");
 
         regItemMachineWithoutID("cell_glass");
         regItemMachineWithoutID("cell_golden");

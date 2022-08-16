@@ -9,7 +9,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.VanillaIngredientSerializer;
 import net.minecraftforge.fml.RegistryObject;
-import ten3.TER;
+import ten3.TConst;
 import ten3.TechnicalEngineering;
 import ten3.core.recipe.CmSerializer;
 import ten3.core.recipe.SingleRecipe;
@@ -39,7 +39,7 @@ public class RecipeInit {
 
         IRecipeType<IRecipe<IInventory>> reg2 = Registry.register(
                 Registry.RECIPE_TYPE,
-                new ResourceLocation(TER.modid, id),
+                new ResourceLocation(TConst.modid, id),
                 new IRecipeType<IRecipe<IInventory>>() {
                     @Override
                     public String toString() {

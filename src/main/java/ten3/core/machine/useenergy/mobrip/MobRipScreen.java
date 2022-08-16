@@ -22,7 +22,7 @@ public class MobRipScreen extends CmScreenMachine {
 
         super.addWidgets();
 
-        widgets.add(energy = new ElementBurnLeft(9, 18, 14, 46, 0, 0, handler, true));
+        widgets.add(energy = getDefaultEne());
 
     }
 

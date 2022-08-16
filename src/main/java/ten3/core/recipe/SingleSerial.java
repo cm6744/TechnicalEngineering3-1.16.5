@@ -7,9 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraftforge.common.crafting.IIngredientSerializer;
-import net.minecraftforge.registries.ForgeRegistryEntry;
-import ten3.TER;
+import ten3.TConst;
 
 public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements CmSerializer<T> {
 
@@ -18,7 +16,7 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
 
     public SingleSerial(IFactory<T> factory, String reg) {
 
-        regName = new ResourceLocation(TER.modid, reg);
+        regName = new ResourceLocation(TConst.modid, reg);
         this.factory = factory;
 
     }
@@ -40,7 +38,7 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
 
         int i = JSONUtils.getInt(json, "time", 120);
         int c = JSONUtils.getInt(json, "count", 1);
-        float cc = JSONUtils.getFloat(json, "chance", 0.5f);
+        float cc = JSONUtils.getFloat(json, "chance", -1);
 
         return factory.create(regName, recipeId, ingredient, res, addition, i, c, cc);
 

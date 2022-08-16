@@ -11,6 +11,11 @@ import ten3.lib.tile.option.Type;
 
 public abstract class CmTileMachineProcessedSingle extends CmTileMachine {
 
+    @Override
+    public boolean hasRecipe() {
+        return true;
+    }
+
     public IRecipeType<? extends IRecipe<IInventory>> recipeType;
 
     public IRecipe<IInventory> recipeNow;
@@ -54,7 +59,7 @@ public abstract class CmTileMachineProcessedSingle extends CmTileMachine {
         ItemStack ext = inventory.getStackInSlot(0);
 
         recipeNow = getRcp(recipeType, ext);
-        if(last != recipeNow) data.set(progress, 0);
+        if(last != recipeNow) data.set(PROGRESS, 0);
         last = recipeNow;
 
         if(recipeNow == null) {
@@ -66,22 +71,24 @@ public abstract class CmTileMachineProcessedSingle extends CmTileMachine {
 
             ItemStack result = recipeNow.getCraftingResult(inventory);
             ItemStack addition = ItemStack.EMPTY;
+            ItemStack fullAdt = addition;
             if(hasAdt && recipeNow instanceof OpportunityRecipe) {
-                addition = ((OpportunityRecipe<IInventory>) recipeNow).additionalOutput();
+                addition = ((OpportunityRecipe<IInventory>) recipeNow).generateAddition();
+                fullAdt = ((OpportunityRecipe<IInventory>) recipeNow).getAdditionOutput();
             }
-            data.set(maxProgress, getTimeCook());
+            data.set(MAX_PROGRESS, getTimeCook());
 
             if(!itr.selfGive(result, 1, lastAdt, true)
-            && !itr.selfGive(addition, 1, lastAdt, true)) return;
+            || !itr.selfGive(fullAdt, 1, lastAdt, true)) return;
 
-            data.translate(energy, -getActual());
+            data.translate(ENERGY, -getActual());
             postProgressUp();
 
-            if(data.get(progress) > data.get(maxProgress)) {
+            if(data.get(PROGRESS) > data.get(MAX_PROGRESS)) {
                 itr.selfGive(result, 1, lastAdt, false);
                 itr.selfGive(addition, 1, lastAdt, false);
                 ext.shrink(1);
-                data.set(progress, 0);
+                data.set(PROGRESS, 0);
             }
             setActive(true);
         }

@@ -61,13 +61,16 @@
   "ten3.redstone_converter": "红石转化元件",
 
   "ten3.engine_extraction": "萃取引擎",
-  "ten3.machine_farm_manager": "农场管理机",
   "ten3.engine_metal": "金属引擎",
+  "ten3.engine_biomass": "生物质引擎",
+
+  "ten3.machine_farm_manager": "农场管理机",
   "ten3.machine_smelter": "熔炼机",
   "ten3.machine_pulverizer": "粉碎机",
   "ten3.machine_compressor": "压缩机",
   "ten3.machine_beacon_simulator": "信标模拟机",
   "ten3.machine_mob_ripper": "生物啃噬者",
+  "ten3.machine_quarry": "采矿场",
 
   "ten3.cable_glass": "玻璃能量线缆",
   "ten3.cable_golden": "黄金能量线缆",
@@ -120,7 +123,7 @@
   "ten3.info.mode.0": "能量",
   "ten3.info.mode.1": "物品",
   "ten3.info.mode.2": "红石",
-  "ten3.info.mode.3": "降级",
+  "ten3.info.mode.3": "范围",
   "ten3.info.mode.4": "拆除",
 
   "ten3.info.in": "主动输入",
@@ -140,9 +143,12 @@
   "ten3.info.bar_energy": "功率:",
   "ten3.info.bar_energy_fact": "实际功率: ",
   "ten3.info.bar_energy_max": "最大功率: ",
-  "ten3.info.bar_energy_in_max": "最大输入功率: ",
-  "ten3.info.bar_energy_out_max": "最大输出功率: ",
+  "ten3.info.bar_energy_in_max": "最大能量输入功率: ",
+  "ten3.info.bar_energy_out_max": "最大能量输出功率: ",
+  "ten3.info.bar_item_in_max": "最大物品输入功率: ",
+  "ten3.info.bar_item_out_max": "最大物品输出功率: ",
   "ten3.locked_slot": "未解锁槽位",
+  "ten3.jei_addition_chance": "副产概率: ",
 
   "ten3.info.engine_extraction.0": "一台普通的发电机，",
   "ten3.info.engine_extraction.1": "可以从燃料当中提取能量。",
@@ -164,8 +170,11 @@
 
   "ten3.info.beacon_simulator.0": "在一定区域内扩散药水效果。",
   "ten3.info.beacon_simulator.1": "需要一个药水物品模板。",
-  "ten3.info.beacon_simulator.2": "一次酿造，随时使用！",
+  "ten3.info.beacon_simulator.2": "范围随等级提升而增大。",
   "ten3.info.beacon_simulator.3": "不过，当心你的能量！",
+
+  "ten3.info.mob_ripper.0": "对一定范围内的生物造成伤害。",
+  "ten3.info.mob_ripper.1": "考虑给它一把下界合金剑吗？",
 
   "ten3.info.farm_manager.0": "把你的农活都交给它吧！",
   "ten3.info.farm_manager.1": "放点种子，它们就会自动被种下。",
@@ -174,5 +183,8 @@
   "ten3.info.engine_metal.0": "使用金属发电。",
   "ten3.info.engine_metal.1": "现在把所有没用的锭扔进去吧！",
   "ten3.info.engine_metal.2": "还有，下界合金发电是最多的，",
-  "ten3.info.engine_metal.3": "（但是谁会这么干呢？）"
+  "ten3.info.engine_metal.3": "（但是谁会这么干呢？）",
+
+  "ten3.info.engine_biomass.0": "把生物能重利用。",
+  "ten3.info.engine_biomass.1": "无论树叶，树干，还是其它植物都可以！"
 }

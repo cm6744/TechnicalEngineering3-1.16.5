@@ -15,7 +15,7 @@ public class CompressorTile extends CmTileMachineProcessedSingle {
 
         super(name, false, 1);
 
-        setCap(kFE(0.1), kFE(0.1), kFE(20), FaceOption.BE_IN, FaceOption.OFF, 15);
+        setCap(kFE(20), FaceOption.BE_IN, FaceOption.OFF, 15);
 
         recipeType = RecipeInit.getRcpType(KeyUtil.translateInfoBarKey(id));
 

@@ -2,7 +2,7 @@ package ten3.init.tab;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import ten3.TER;
+import ten3.TConst;
 import ten3.init.ItemInit;
 
 public class DefGroup extends ItemGroup {
@@ -12,7 +12,7 @@ public class DefGroup extends ItemGroup {
 
     public DefGroup(String id) {
 
-        super(TER.modid + "." + id);
+        super(TConst.modid + "." + id);
 
     }
 

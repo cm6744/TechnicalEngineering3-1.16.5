@@ -13,16 +13,4 @@ public class UpgradeEnergy extends UpgradeItem {
 
     }
 
-    @Override
-    public void reset(CmTileMachine tile) {
-
-        tile.efficientIn += tile.initialEfficientIn * 0.1;
-
-    }
-
-    @Override
-    public int limit() {
-        return 1;
-    }
-
 }

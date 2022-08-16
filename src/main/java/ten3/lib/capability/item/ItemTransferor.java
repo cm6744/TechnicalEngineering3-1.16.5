@@ -11,11 +11,12 @@ import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.FaceOption;
 import ten3.util.DireUtil;
 
+import java.util.List;
+
 @SuppressWarnings("all")
 public class ItemTransferor {
 
     CmTileMachine t;
-    public static int cap = 16;
 
     public ItemTransferor(CmTileMachine t) {
         this.t = t;
@@ -60,7 +61,7 @@ public class ItemTransferor {
             IItemHandler dest = handlerOf(tile, DireUtil.safeOps(d));
             if(dest == null) return;
 
-            srcToDest(src, dest);
+            srcToDest(src, dest, false);
         }
 
     }
@@ -77,7 +78,7 @@ public class ItemTransferor {
             IItemHandler dest = handlerOf(t, d);
             if(dest == null) return;
 
-            srcToDest(src, dest);
+            srcToDest(src, dest, true);
         }
 
     }
@@ -109,7 +110,7 @@ public class ItemTransferor {
 
     }
 
-    public void srcToDest(IItemHandler src, IItemHandler dest) {
+    public void srcToDest(IItemHandler src, IItemHandler dest, boolean into) {
 
         ItemStack s = ItemStack.EMPTY;
         int i = -1;
@@ -117,7 +118,8 @@ public class ItemTransferor {
             i++;
             if(i >= src.getSlots()) break;
 
-            s = src.extractItem(i, Math.min(cap, getRemainSize(dest, src.getStackInSlot(i))), false);
+            s = src.extractItem(i, Math.min(into ? t.maxReceiveItem : t.maxExtractItem,
+                    getRemainSize(dest, src.getStackInSlot(i))), false);
         }
 
         int k = -1;
@@ -153,6 +155,20 @@ public class ItemTransferor {
     public boolean selfGive(ItemStack stack, boolean sim) {
 
         return selfGive(stack, 0, t.inventory.getSizeInventory() - 1, sim);
+
+    }
+
+    public boolean selfGiveList(List<ItemStack> ss, boolean sim) {
+
+        boolean allReceive = true;
+
+        for(ItemStack stack : ss) {
+            if(!selfGive(stack, sim)) {
+                allReceive = false;
+            }
+        }
+
+        return allReceive;
 
     }
 

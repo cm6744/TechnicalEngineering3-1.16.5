@@ -3,6 +3,6 @@
   "ingredient": {
     "tag": "forge:ingots/copper"
   },
-  "output": "ten3:tin_plate",
+  "output": "ten3:copper_plate",
   "time": 100
 }
