@@ -12,9 +12,9 @@ import ten3.TConst;
 public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements CmSerializer<T> {
 
     public final ResourceLocation regName;
-    private final IFactory<T> factory;
+    private final IFactoryCm<T> factory;
 
-    public SingleSerial(IFactory<T> factory, String reg) {
+    public SingleSerial(IFactoryCm<T> factory, String reg) {
 
         regName = new ResourceLocation(TConst.modid, reg);
         this.factory = factory;
@@ -36,7 +36,7 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
         addition = getStackJSON(json, "addition");
         ingredient = getIngJSON(json);
 
-        int i = JSONUtils.getInt(json, "time", 120);
+        int i = JSONUtils.getInt(json, "time", fallBackTime);
         int c = JSONUtils.getInt(json, "count", 1);
         float cc = JSONUtils.getFloat(json, "chance", -1);
 
@@ -67,11 +67,6 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
 
     }
 
-    public interface IFactory<T extends SingleRecipe> {
-        T create(ResourceLocation reg, ResourceLocation idIn, CmItemList ingredientIn,
-                 ItemStack resultIn, ItemStack add, int cookTimeIn, int count, double cc);
-    }
-
     public static ItemStack getStackJSON(JsonObject json, String name) {
 
         if(json.has(name)) {
@@ -90,6 +85,12 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
     public static CmItemList getIngJSON(JsonObject json) {
 
         return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient"));
+
+    }
+
+    public static CmItemList getIngJSON(JsonObject json, int index) {
+
+        return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient" + index));
 
     }
 

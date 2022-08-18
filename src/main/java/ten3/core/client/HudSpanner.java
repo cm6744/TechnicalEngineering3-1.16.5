@@ -74,7 +74,7 @@ public class HudSpanner {
         }
 
         if(red == RedstoneMode.LOW) {
-                c3.appendSibling(KeyUtil.translated("ten3.info.low"));
+            c3.appendSibling(KeyUtil.translated("ten3.info.low"));
         }
         else if(red == RedstoneMode.HIGH) {
             c3.appendSibling(KeyUtil.translated("ten3.info.high"));
@@ -116,14 +116,15 @@ public class HudSpanner {
 
             Direction d = r.getFace();
             BlockPos hitPos = r.getPos();
-            if(!world.getBlockState(hitPos).isSolid()) {
-                hitPos = hitPos.down();
-            }
             TileEntity t = world.getTileEntity(hitPos);
             render(t instanceof CmTileMachine, player, e.getMatrixStack(), hitPos, t, d);
 
-            if(r.getType() == RayTraceResult.Type.MISS) return;//if miss, return!
+            if(r.getType() == RayTraceResult.Type.MISS) return;
 
+            //RENDER BINDING
+            if(!world.getBlockState(hitPos).isSolid()) {
+                hitPos = hitPos.down();//if not solid, like crop, render it under a block
+            }
             BlockPos biPos = new BlockPos(
                     ItemUtil.getTag(i, "bindX"),
                     ItemUtil.getTag(i, "bindY"),

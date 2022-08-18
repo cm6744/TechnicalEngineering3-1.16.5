@@ -1,21 +1,17 @@
 package ten3.core.recipe;
 
 import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import ten3.init.RecipeInit;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SingleRecipe implements OpportunityRecipe<IInventory> {
 
@@ -44,6 +40,12 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     }
 
     @Override
+    public NonNullList<Ingredient> getIngredients()
+    {
+        return NonNullList.from(Ingredient.EMPTY, ingredient.vanillaIngre());
+    }
+
+    @Override
     public int time() {
         return time;
     }
@@ -51,7 +53,7 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     @Override
     public boolean matches(IInventory inv, World worldIn) {
 
-        return ingredient.test(inv.getStackInSlot(0));
+        return ingredient.hasValidIn(inv.getStackInSlot(0));
 
     }
 
@@ -69,12 +71,6 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     public ItemStack getAdditionOutput()
     {
         return addition;
-    }
-
-    @Override
-    public List<ItemStack> input()
-    {
-        return ingredient.stackLstOf();
     }
 
     public List<ItemStack> output() {

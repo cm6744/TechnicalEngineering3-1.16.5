@@ -6,6 +6,8 @@ import net.minecraft.util.ResourceLocation;
 
 public interface CmSerializer<T extends IRecipe<?>> extends IRecipeSerializer<T> {
 
+    public static int fallBackTime = 150;
+
     String id();
 
 }

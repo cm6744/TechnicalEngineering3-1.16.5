@@ -11,9 +11,7 @@ import net.minecraftforge.common.crafting.VanillaIngredientSerializer;
 import net.minecraftforge.fml.RegistryObject;
 import ten3.TConst;
 import ten3.TechnicalEngineering;
-import ten3.core.recipe.CmSerializer;
-import ten3.core.recipe.SingleRecipe;
-import ten3.core.recipe.SingleSerial;
+import ten3.core.recipe.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +26,7 @@ public class RecipeInit {
 
         regRcp(new SingleSerial<>(SingleRecipe::new, "pulverizer"));
         regRcp(new SingleSerial<>(SingleRecipe::new, "compressor"));
+        regRcp(new MTSSerial<>(MTSRecipe::new, "psionicant"));
     }
 
     public static void regRcp(CmSerializer<?> s) {

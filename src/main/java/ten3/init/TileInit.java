@@ -14,6 +14,7 @@ import ten3.core.machine.useenergy.beacon.BeaconTile;
 import ten3.core.machine.useenergy.compressor.CompressorTile;
 import ten3.core.machine.useenergy.farm.FarmTile;
 import ten3.core.machine.useenergy.mobrip.MobRipTile;
+import ten3.core.machine.useenergy.psionicant.PsionicantTile;
 import ten3.core.machine.useenergy.pulverizer.PulverizerTile;
 import ten3.core.machine.useenergy.quarry.QuarryTile;
 import ten3.core.machine.useenergy.smelter.FurnaceTile;
@@ -40,6 +41,7 @@ public class TileInit {
         regTile(() -> new BeaconTile("machine_beacon_simulator"));
         regTile(() -> new MobRipTile("machine_mob_ripper"));
         regTile(() -> new QuarryTile("machine_quarry"));
+        regTile(() -> new PsionicantTile("machine_psionicant"));
 
         regTile(() -> new CableTile("cable_glass"));
         regTile(() -> new CableTileGolden("cable_golden"));

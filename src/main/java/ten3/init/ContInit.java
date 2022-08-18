@@ -29,6 +29,8 @@ import ten3.core.machine.useenergy.farm.FarmScreen;
 import ten3.core.machine.useenergy.farm.FarmTile;
 import ten3.core.machine.useenergy.mobrip.MobRipScreen;
 import ten3.core.machine.useenergy.mobrip.MobRipTile;
+import ten3.core.machine.useenergy.psionicant.PsionicantScreen;
+import ten3.core.machine.useenergy.psionicant.PsionicantTile;
 import ten3.core.machine.useenergy.pulverizer.PulverizerScreen;
 import ten3.core.machine.useenergy.pulverizer.PulverizerTile;
 import ten3.core.machine.useenergy.quarry.QuarryScreen;
@@ -63,6 +65,7 @@ public class ContInit {
         regCont(new BeaconTile("machine_beacon_simulator"));
         regCont(new MobRipTile("machine_mob_ripper"));
         regCont(new QuarryTile("machine_quarry"));
+        regCont(new PsionicantTile("machine_psionicant"));
 
         regCont(new CellTile("cell_glass"));
         regCont(new CellTileGolden("cell_golden"));
@@ -122,6 +125,7 @@ public class ContInit {
         bindScr("machine_beacon_simulator", BeaconScreen::new);
         bindScr("machine_mob_ripper", MobRipScreen::new);
         bindScr("machine_quarry", QuarryScreen::new);
+        bindScr("machine_psionicant", PsionicantScreen::new);
 
         bindScr("cell_glass", CellScreen::new);
         bindScr("cell_golden", CellScreen::new);

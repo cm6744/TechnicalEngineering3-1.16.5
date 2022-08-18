@@ -80,6 +80,7 @@ public class ItemInit {
         regItemMachine("beacon_simulator");
         regItemMachine("mob_ripper");
         regItemMachine("quarry");
+        regItemMachine("psionicant");
 
         regItemMachineWithoutID("cell_glass");
         regItemMachineWithoutID("cell_golden");

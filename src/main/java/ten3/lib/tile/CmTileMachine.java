@@ -61,8 +61,8 @@ public abstract class CmTileMachine extends CmTileEntity {
     }
 
     @Nullable
-    public<T extends IRecipe<IInventory>> T getRcp(IRecipeType<T> type, ItemStack stack) {
-        return ExcUtil.safeGetRecipe(world, type, new Inventory(stack)).orElse(null);
+    public<T extends IRecipe<IInventory>> T getRcp(IRecipeType<T> type, ItemStack... stacks) {
+        return ExcUtil.safeGetRecipe(world, type, new Inventory(stacks)).orElse(null);
     }
 
     //data poses.

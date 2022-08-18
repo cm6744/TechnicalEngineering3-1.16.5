@@ -1,0 +1,11 @@
+{
+  "type": "ten3:psionicant",
+  "ingredient0": {
+    "item": "minecraft:glass_bottle"
+  },
+  "ingredient1": {
+    "mark_empty": ""
+  },
+  "output": "minecraft:experience_bottle",
+  "time": 800
+}

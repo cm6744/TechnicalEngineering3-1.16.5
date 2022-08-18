@@ -12,7 +12,7 @@ public class Progressor {
 
     public void progressOn(IntArrayCm data, int eff) {
 
-            int max = data.get(MAX_PROGRESS);
+            int max = 100;
             timeProgressSpeed = max * eff * 0.0003 + 0.2;
 
             if(timeProgressSpeed >= 1) {

@@ -71,6 +71,7 @@
   "ten3.machine_beacon_simulator": "Beacon Simulator",
   "ten3.machine_mob_ripper": "Mob Ripper",
   "ten3.machine_quarry": "Quarry",
+  "ten3.machine_psionicant": "Psionicant",
 
   "ten3.cell_glass": "Glass Energy Cell",
   "ten3.cell_golden": "Golden Energy Cell",
@@ -186,5 +187,11 @@
   "ten3.info.engine_metal.3": "But who will do that?",
 
   "ten3.info.engine_biomass.0": "Reuse biomass energy.",
-  "ten3.info.engine_biomass.1": "Leaves, logs, plants, and so on...!"
+  "ten3.info.engine_biomass.1": "Leaves, logs, plants, and so on...!",
+
+  "ten3.info.quarry.0": "Automatically dig all blocks under it.",
+  "ten3.info.quarry.1": "It needs a pickaxe...",
+  "ten3.info.quarry.2": "Pay attention to your UNDERGROUND!",
+
+  "ten3.info.psionicant.0": "Explore..."
 }

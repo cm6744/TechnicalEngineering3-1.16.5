@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
@@ -22,6 +23,7 @@ public class CmItemList {
 
     String type;
     List<Item> matches;
+    ITag<Item> tag;
     ResourceLocation loc;
 
     public List<ItemStack> stackLstOf() {
@@ -41,19 +43,26 @@ public class CmItemList {
     public CmItemList(ITag<Item> s, ResourceLocation rl) {
         matches = s.getAllElements();
         type = "tag";
+        tag = s;
         loc = rl;
     }
 
     public CmItemList() {
-        matches = Lists.newArrayList();
-        type = "item";
+        matches = Lists.newArrayList(Items.AIR);
+        type = "mark_empty";
     }
 
-    public boolean test(ItemStack... s) {
+    public boolean hasValidIn(ItemStack... s) {
         for(ItemStack k : s) {
-            if(matches.contains(k.getItem())) return true;
+            if(matches.contains(k.getItem())) {
+                return true;
+            }
         }
         return false;
+    }
+
+    public Ingredient vanillaIngre() {
+        return tag == null ? Ingredient.fromStacks(stackLstOf().stream()) : Ingredient.fromTag(tag);
     }
 
     private static CmItemList GETITEM(String i) {
@@ -74,6 +83,10 @@ public class CmItemList {
 
     public static CmItemList parseFrom(JsonObject json) {
 
+        if(json.has("mark_empty")) {
+            return new CmItemList();//cannot check item!
+        }
+
         if (json.has("item")) {
             return GETITEM(JSONUtils.getString(json, "item"));
         } else if (json.has("tag")) {
@@ -88,6 +101,10 @@ public class CmItemList {
 
         String type = buffer.readString();
         ResourceLocation rl = buffer.readResourceLocation();
+
+        if(type.equals("mark_empty")) {
+            return new CmItemList();//cannot check item!
+        }
 
         if(type.equals("item")) {
             return GETITEM(rl.toString());

@@ -71,6 +71,7 @@
   "ten3.machine_beacon_simulator": "信标模拟机",
   "ten3.machine_mob_ripper": "生物啃噬者",
   "ten3.machine_quarry": "采矿场",
+  "ten3.machine_psionicant": "灵能处理器",
 
   "ten3.cable_glass": "玻璃能量线缆",
   "ten3.cable_golden": "黄金能量线缆",
@@ -186,5 +187,11 @@
   "ten3.info.engine_metal.3": "（但是谁会这么干呢？）",
 
   "ten3.info.engine_biomass.0": "把生物能重利用。",
-  "ten3.info.engine_biomass.1": "无论树叶，树干，还是其它植物都可以！"
+  "ten3.info.engine_biomass.1": "无论树叶，树干，还是其它植物都可以！",
+
+  "ten3.info.quarry.0": "自动挖掘它下方的所有方块。",
+  "ten3.info.quarry.1": "需要一把镐子！",
+  "ten3.info.quarry.2": "注意你的地下工事。",
+
+  "ten3.info.psionicant.0": "探索..."
 }

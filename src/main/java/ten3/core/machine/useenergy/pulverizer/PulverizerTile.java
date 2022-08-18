@@ -3,18 +3,18 @@ package ten3.core.machine.useenergy.pulverizer;
 import net.minecraft.inventory.IInventory;
 import ten3.core.recipe.IBaseRecipeCm;
 import ten3.init.RecipeInit;
-import ten3.lib.tile.recipe.CmTileMachineProcessedSingle;
+import ten3.lib.tile.recipe.CmTileMachineProcessed;
 import ten3.lib.tile.option.FaceOption;
 import ten3.lib.wrapper.SlotCm;
 import ten3.lib.wrapper.SlotCustomCm;
 import ten3.util.KeyUtil;
 
-public class PulverizerTile extends CmTileMachineProcessedSingle {
+public class PulverizerTile extends CmTileMachineProcessed {
 
     @SuppressWarnings("all")
     public PulverizerTile(String name) {
 
-        super(name, true, 4);
+        super(name, true, 1, 4);
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OFF, 20);
 

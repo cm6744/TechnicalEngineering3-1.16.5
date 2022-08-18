@@ -22,19 +22,21 @@ public abstract class TECategory<T extends OpportunityRecipe<IInventory>> extend
     public void setIngredients(T t, IIngredients iIngredients)
     {
         List<Ingredient> ingredientList = new ArrayList<>();
-        for(ItemStack i : t.input()) {
-            ingredientList.add(Ingredient.fromStacks(i));
-        }
-        if(hasNoEmpty(t.input()))
+        ingredientList.addAll(t.getIngredients());
+        appendListIn(ingredientList, t);
         iIngredients.setInputIngredients(ingredientList);
 
         List<ItemStack> so = t.output();
         if(!t.getAdditionOutput().isEmpty()) {
             so.add(t.getAdditionOutput());//must not be empty
         }
-        if(hasNoEmpty(t.output()))
+        appendListOut(so, t);
         iIngredients.setOutputs(VanillaTypes.ITEM, so);
     }
+
+    public void appendListIn(List<Ingredient> ing, T re) {}
+
+    public void appendListOut(List<ItemStack> ing, T re) {}
 
     @Override
     public void draw(T recipe, MatrixStack matrixStack, double mouseX, double mouseY)

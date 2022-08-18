@@ -15,6 +15,7 @@ import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
 import ten3.TConst;
 import ten3.core.machine.useenergy.compressor.CompressorScreen;
+import ten3.core.machine.useenergy.psionicant.PsionicantScreen;
 import ten3.core.machine.useenergy.pulverizer.PulverizerScreen;
 import ten3.core.machine.useenergy.smelter.FurnaceScreen;
 import ten3.init.ItemInit;
@@ -29,6 +30,7 @@ public class TEJeiPlugins implements IModPlugin {
         addRecipe(registration, "pulverizer");
         addRecipe(registration, "compressor");
         addRecipeSM(registration, "smelter");
+        addRecipe(registration, "psionicant");
     }
 
     private void addRecipe(IRecipeRegistration registration, String name) {
@@ -46,9 +48,10 @@ public class TEJeiPlugins implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration)
     {
-        registration.addRecipeCategories(new TECategorySgMulti( "pulverizer", 27, 32));
+        registration.addRecipeCategories(new TECategorySgAddition( "pulverizer", 27, 32));
         registration.addRecipeCategories(new TECategorySg( "compressor", 27, 63));
         registration.addRecipeCategories(new TECategorySmelt("smelter", 27, 0));
+        registration.addRecipeCategories(new TECategorySgMTS("psionicant", 27, 0));
     }
 
     @Override
@@ -57,6 +60,7 @@ public class TEJeiPlugins implements IModPlugin {
         addArea(registration, PulverizerScreen.class, "pulverizer");
         addArea(registration, CompressorScreen.class, "compressor");
         addArea(registration, FurnaceScreen.class, "smelter");
+        addArea(registration, PsionicantScreen.class, "psionicant");
     }
 
     private void addArea(IGuiHandlerRegistration registration, Class<? extends ContainerScreen<?>> clazz, String name) {
@@ -70,6 +74,7 @@ public class TEJeiPlugins implements IModPlugin {
         addCatalyst(registration, "pulverizer");
         addCatalyst(registration, "compressor");
         addCatalyst(registration, "smelter");
+        addCatalyst(registration, "psionicant");
     }
 
     private void addCatalyst(IRecipeCatalystRegistration registration, String name) {

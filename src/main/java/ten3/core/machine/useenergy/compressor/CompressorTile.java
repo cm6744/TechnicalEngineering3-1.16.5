@@ -4,16 +4,16 @@ import net.minecraft.inventory.IInventory;
 import ten3.core.recipe.IBaseRecipeCm;
 import ten3.init.RecipeInit;
 import ten3.lib.tile.option.FaceOption;
-import ten3.lib.tile.recipe.CmTileMachineProcessedSingle;
+import ten3.lib.tile.recipe.CmTileMachineProcessed;
 import ten3.lib.wrapper.SlotCm;
 import ten3.lib.wrapper.SlotCustomCm;
 import ten3.util.KeyUtil;
 
-public class CompressorTile extends CmTileMachineProcessedSingle {
+public class CompressorTile extends CmTileMachineProcessed {
 
     public CompressorTile(String name) {
 
-        super(name, false, 1);
+        super(name, false, 1, 1);
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OFF, 15);
 

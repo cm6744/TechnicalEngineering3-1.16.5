@@ -14,8 +14,6 @@ public interface IBaseRecipeCm<T extends IInventory> extends IRecipe<T> {
 
     String condition();
 
-    List<ItemStack> input();
-
     List<ItemStack> output();
 
 }

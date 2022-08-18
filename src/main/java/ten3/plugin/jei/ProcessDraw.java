@@ -48,7 +48,7 @@ public class ProcessDraw implements IDrawable {
     @Override
     public void draw(MatrixStack matrixStack, int i, int i1)
     {
-        p += per;
+        p += per * 0.2;
         if(p >= 1) p = 0;
 
         RenderHelper.render(matrixStack, 0, 0, wi, hi, 256, 256, u, v, jeiHandler);
