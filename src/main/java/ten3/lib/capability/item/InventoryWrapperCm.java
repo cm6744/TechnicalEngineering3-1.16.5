@@ -31,16 +31,13 @@ public class InventoryWrapperCm extends InvWrapper {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
 
-        int cap = Math.min(tile.maxReceiveItem, stack.getCount());
-        ItemStack insertStack = stack.copy().split(cap);
-
         if((di == null
                 || tile.direCheckItem(di) == FaceOption.IN
                 || tile.direCheckItem(di) == FaceOption.BE_IN
                 || tile.direCheckItem(di) == FaceOption.BOTH)
         ) {
-            if(tile.inventory.isIn(slot) && tile.inventory.isUsed(slot) && isItemValid(slot, insertStack)) {
-                return super.insertItem(slot, insertStack, simulate);
+            if(tile.inventory.isIn(slot) && tile.inventory.isUsed(slot) && isItemValid(slot, stack)) {
+                return super.insertItem(slot, stack, simulate);
             }
         }
 

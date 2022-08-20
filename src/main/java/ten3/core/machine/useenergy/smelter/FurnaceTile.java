@@ -23,6 +23,12 @@ public class FurnaceTile extends CmTileMachineProcessed {
     }
 
     @Override
+    public void shrinkItems()
+    {
+        inventory.getStackInSlot(0).shrink(1);
+    }
+
+    @Override
     public int getTimeCook() {
         return ((FurnaceRecipe) recipeNow).getCookTime() / 2;
     }
