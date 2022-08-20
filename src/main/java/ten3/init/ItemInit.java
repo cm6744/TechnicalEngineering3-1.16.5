@@ -6,10 +6,6 @@ import ten3.TechnicalEngineering;
 import ten3.core.item.energy.BlockItemFEStorage;
 import ten3.core.item.energy.ItemFEStorage;
 import ten3.core.item.upgrades.*;
-import ten3.core.item.upgrades.impl.UpgradeEnergy;
-import ten3.core.item.upgrades.impl.UpgradeSpeed;
-import ten3.core.item.upgrades.impl.UpgradeStorage;
-import ten3.core.item.upgrades.impl.UpgradeTransfer;
 import ten3.core.item.*;
 import ten3.init.template.DefItem;
 import ten3.init.template.DefItemBlock;
@@ -29,13 +25,12 @@ public class ItemInit {
     public static void regAll() {
 
         //Protected:
+        regItem("pedia", new InvisibleItem());
         regItem("technical_item", new InvisibleItem());
         regItem("technical_block", new InvisibleItem());
 
         regItem("spanner", new Spanner());
-        regItem("energy_capacity", new ItemFEStorage(
-                PacketCapData.of(kFE(5), kFE(5), kFE(500), 0, 0)
-        ));
+        regItem("energy_capacity", new ItemFEStorage(kFE(500), kFE(5), kFE(5)));
 
         //produced things
         //regItemDef("energy_core");
@@ -43,6 +38,7 @@ public class ItemInit {
         regItemDef("redstone_conductor");
         regItemDef("redstone_converter");
         regItemDef("redstone_storer");
+        regItemDef("bizarrerie");
         //too imba
         //regItem("world_bag", new WorldBag());
 
@@ -57,12 +53,9 @@ public class ItemInit {
         regItemDef("starlight_dust");
 
         //upgrades
-        regItem("speed_upgrade", new UpgradeSpeed());
-        regItem("storage_upgrade", new UpgradeStorage());
-        regItem("energy_upgrade", new UpgradeEnergy());
-        regItem("transfer_upgrade", new UpgradeTransfer());
         regItem("augmented_levelup", new LevelupAug());
         regItem("powered_levelup", new LevelupPower());
+        regItem("relic_levelup", new LevelupAnc());
 
         //ores
         regItemBlockDef("tin_ore");

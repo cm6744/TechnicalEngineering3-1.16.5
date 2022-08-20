@@ -11,10 +11,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 public class ExcUtil {
 
@@ -30,6 +27,15 @@ public class ExcUtil {
 
         RecipeManager rm = world.getRecipeManager();
         return rm.getRecipe(type, i, world);
+
+    }
+
+    public static Collection<? extends IRecipe<IInventory>> safeGetRecipes(World world, IRecipeType<? extends IRecipe<IInventory>> type) {
+
+        if(world == null) return new ArrayList<>();
+
+        RecipeManager rm = world.getRecipeManager();
+        return rm.getRecipesForType(type);
 
     }
 

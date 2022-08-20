@@ -19,16 +19,16 @@ import java.util.List;
 
 public class ItemFEStorage extends DefItem {
 
-    PacketCapData pd;
+    int sto, rec, ext;
 
-    public ItemFEStorage(PacketCapData data) {
+    public ItemFEStorage(int s, int r, int e) {
         super(1);
-        pd = data;
+        sto = s; rec = r; ext = e;
     }
 
     @Override
     public ItemStack getDefaultInstance() {
-        return EnergyItemHelper.getState(this, pd);
+        return EnergyItemHelper.getState(this, sto, rec, ext);
     }
 
     @Nullable
@@ -44,7 +44,7 @@ public class ItemFEStorage extends DefItem {
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack) {
-        return 1 - ItemUtil.getTag(stack, "energy") / (double) pd.sto;
+        return 1 - ItemUtil.getTag(stack, "energy") / (double) sto;
     }
 
     @Override
@@ -56,8 +56,8 @@ public class ItemFEStorage extends DefItem {
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
 
         if(isInGroup(group)) {
-            EnergyItemHelper.fillEmpty(this, items, pd);
-            EnergyItemHelper.fillFull(this, items, pd);
+            EnergyItemHelper.fillEmpty(this, items, sto, rec, ext);
+            EnergyItemHelper.fillFull(this, items, sto, rec, ext);
         }
 
     }
@@ -69,7 +69,7 @@ public class ItemFEStorage extends DefItem {
 
     @Override
     public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        EnergyItemHelper.setState(stack, pd);
+        EnergyItemHelper.setState(stack, sto, rec, ext);
     }
 
 }

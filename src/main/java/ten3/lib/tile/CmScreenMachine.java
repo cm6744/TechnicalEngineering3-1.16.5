@@ -123,12 +123,12 @@ public class CmScreenMachine extends CmScreen<CmContainerMachine> {
                 container.data.get(I_EXT)
         );
 
-        upglock_1.state = container.data.get(level) >= Level.COMMON;
-        upglock_2.state = container.data.get(level) >= Level.COMMON;
-        upglock_3.state = container.data.get(level) >= Level.AUGMENTED;
-        upglock_4.state = container.data.get(level) >= Level.AUGMENTED;
-        upglock_5.state = container.data.get(level) >= Level.POWERED;
-        upglock_6.state = container.data.get(level) >= Level.POWERED;
+        upglock_1.state = container.data.get(UPGSIZE) >= 1;
+        upglock_2.state = container.data.get(UPGSIZE) >= 2;
+        upglock_3.state = container.data.get(UPGSIZE) >= 3;
+        upglock_4.state = container.data.get(UPGSIZE) >= 4;
+        upglock_5.state = container.data.get(UPGSIZE) >= 5;
+        upglock_6.state = container.data.get(UPGSIZE) >= 6;
 
     }
 

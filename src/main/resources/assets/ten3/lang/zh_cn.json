@@ -59,6 +59,7 @@
   "ten3.redstone_conductor": "红石传导元件",
   "ten3.redstone_storer": "红石转存元件",
   "ten3.redstone_converter": "红石转化元件",
+  "ten3.bizarrerie": "奇异物质",
 
   "ten3.engine_extraction": "萃取引擎",
   "ten3.engine_metal": "金属引擎",
@@ -83,39 +84,25 @@
 
   "ten3.shift": "按住 [SHIFT] 查看更多信息",
 
-  "ten3.speed_upgrade": "高速传导升级",
-  "ten3.energy_upgrade": "功率抑制升级",
-  "ten3.storage_upgrade": "红石充能升级",
-  "ten3.transfer_upgrade": "动态传输升级",
-  "ten3.item_upgrade": "物品泵升级",
-  "ten3.gem_upgrade": "晶体燃烧升级",
-
-  "ten3.info.upgrade.limit": "安装上限: ",
-  "ten3.info.speed_upgrade.0": "机器: 效率提升",
-  "ten3.info.speed_upgrade.1": "让机器运行得更快！",
-  "ten3.info.speed_upgrade.2": "但是，相应消耗的能量也会增加。",
-  "ten3.info.energy_upgrade.0": "机器: 效率降低",
-  "ten3.info.energy_upgrade.1": "让机器运行得更慢。",
-  "ten3.info.energy_upgrade.2": "由此，可以降低机器耗能。",
-  "ten3.info.storage_upgrade.0": "机器: 电容量提升",
-  "ten3.info.storage_upgrade.1": "加装额外的电容，使能量上限提升。",
-  "ten3.info.transfer_upgrade.0": "机器: 传输速度提升",
-  "ten3.info.transfer_upgrade.1": "提高机器的能量输入、输出上限。",
-  "ten3.info.augmented_levelup.0": "机器: 升级至增强",
-  "ten3.info.augmented_levelup.1": "给予额外两个升级槽位！",
-  "ten3.info.powered_levelup.0": "机器: 升级至充能",
-  "ten3.info.powered_levelup.1": "给予额外两个升级槽位！",
-
-  "ten3.info.too_much_upgrades": "这台机器的升级组件太多了！请提升它的等级……",
+  "ten3.info.too_much_upgrades": "这台机器的升级组件太多了！",
   "ten3.info.not_support_upgrade": "这台机器不支持这个升级！",
   "ten3.info.upgrade_successfully": " 安装成功。",
 
   "ten3.augmented_levelup": "增强升级组件",
   "ten3.powered_levelup": "充能升级组件",
+  "ten3.relic_levelup": "遗落升级组件",
+
+  "ten3.augmented_levelup.0": "提供 1 个额外升级槽位， 20% 效能提升。",
+  "ten3.powered_levelup.0": "提供 2 个额外升级槽位， 35% 效能提升。",
+  "ten3.relic_levelup.0": "不提供额外升级槽位， 100% 效能提升。",
 
   "ten3.level.0": " (普通)",
-  "ten3.level.1": " (增强)",
-  "ten3.level.2": " (充能)",
+  "ten3.level.1": " (坚硬)",
+  "ten3.level.2": " (迅捷)",
+  "ten3.level.3": " (充能)",
+  "ten3.level.4": " (闪耀)",
+  "ten3.level.5": " (强力)",
+  "ten3.level.6": " (顶级)",
 
   "ten3.info.spanner.dire.energy": "能量传输: ",
   "ten3.info.spanner.dire.item": "物品传输: ",
@@ -193,5 +180,26 @@
   "ten3.info.quarry.1": "需要一把镐子！",
   "ten3.info.quarry.2": "注意你的地下工事。",
 
-  "ten3.info.psionicant.0": "探索..."
+  "ten3.info.psionicant.0": "探索...",
+
+
+
+  "ten3.adv.root": "科能工程3",
+  "ten3.adv.root.0": "梦开始的地方",
+  "ten3.adv.copper": "这不是铜吗？",
+  "ten3.adv.copper.0": "从山洞里搞个铜矿石。",
+  "ten3.adv.engine": "火力发电",
+  "ten3.adv.engine.0": "制作萃取发电机。",
+  "ten3.adv.compress": "别把手伸里头！",
+  "ten3.adv.compress.0": "制作压缩机。",
+  "ten3.adv.crush": "双倍矿产",
+  "ten3.adv.crush.0": "制作粉碎机，然后获得双倍矿物。",
+  "ten3.adv.cable": "它要去哪？",
+  "ten3.adv.cable.0": "制作一点玻璃能量线缆。",
+  "ten3.adv.cell": "它要去那。",
+  "ten3.adv.cell.0": "制作一个玻璃能量单元来储存能量。",
+  "ten3.adv.span": "机械工程师",
+  "ten3.adv.span.0": "扳手，它会帮助你调配机器的。",
+  "ten3.adv.relic": "过去与现在",
+  "ten3.adv.relic.0": "得到一个遗落升级组件，无论在哪。"
 }

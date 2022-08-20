@@ -27,7 +27,7 @@ public class ItemEnergyCapProvider implements ICapabilityProvider {
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if(Objects.equals(cap, CapabilityEnergy.ENERGY)) {
             return (LazyOptional<T>) LazyOptional.of(() -> new FEStorageItem(
-                    ItemUtil.getTag(stack, "storage"),
+                    ItemUtil.getTag(stack, "maxEnergy"),
                     ItemUtil.getTag(stack, "receive"),
                     ItemUtil.getTag(stack, "extract"),
                     stack

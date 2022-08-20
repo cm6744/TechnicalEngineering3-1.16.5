@@ -3,16 +3,16 @@ package ten3.core.item.upgrades;
 import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.Level;
 
-public class LevelupAug extends LevelupItem {
+public class LevelupAug extends UpgradeItem {
 
-    @Override
-    public boolean effect(CmTileMachine tile) {
-
-        if(tile.levelIn != Level.COMMON) return false;
-
-        tile.levelIn = Level.AUGMENTED;
-        return true;
-
+    public LevelupAug() {
+        super(0.2);
     }
 
+    @Override
+    public boolean effect(CmTileMachine tile)
+    {
+        tile.upgSize += 1;
+        return super.effect(tile);
+    }
 }

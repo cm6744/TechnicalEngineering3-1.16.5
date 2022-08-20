@@ -25,9 +25,7 @@ public class BlockItemFEStorage extends DefItemBlock {
     //in game item do
 
     private CmTileMachine getBind() {
-
         return (CmTileMachine) TileInit.getType(getRegistryName().getPath()).create();
-
     }
 
     public BlockItemFEStorage(Block b) {
@@ -53,10 +51,7 @@ public class BlockItemFEStorage extends DefItemBlock {
     @Override
     public ItemStack getDefaultInstance() {
         CmTileMachine t = getBind();
-        if(t == null) {
-            return super.getDefaultInstance();
-        }
-        return EnergyItemHelper.getState(this, t.packData());
+        return EnergyItemHelper.getState(this, t.maxStorage, t.maxReceive, t.maxExtract);
     }
 
     @Override
@@ -66,8 +61,8 @@ public class BlockItemFEStorage extends DefItemBlock {
 
     @Override
     public double getDurabilityForDisplay(ItemStack stack) {
-        if(ItemUtil.getTag(stack, "storage") == 0) return 0;
-        return 1 - ItemUtil.getTag(stack, "energy") / (double) ItemUtil.getTag(stack, "storage");
+        if(ItemUtil.getTag(stack, "maxEnergy") == 0) return 0;
+        return 1 - ItemUtil.getTag(stack, "energy") / (double) ItemUtil.getTag(stack, "maxEnergy");
     }
 
     @Override
@@ -80,10 +75,10 @@ public class BlockItemFEStorage extends DefItemBlock {
 
         if(isInGroup(group)) {
             CmTileMachine t = getBind();
-            EnergyItemHelper.fillEmpty(this, items, t.packData());
+            EnergyItemHelper.fillEmpty(this, items, t.maxStorage, t.maxReceive, t.maxExtract);
 
             if(getBlock() instanceof Cell) {
-                EnergyItemHelper.fillFull(this, items, t.packData());
+                EnergyItemHelper.fillFull(this, items, t.maxStorage, t.maxReceive, t.maxExtract);
             }
         }
 
@@ -97,7 +92,7 @@ public class BlockItemFEStorage extends DefItemBlock {
     @Override
     public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
         CmTileMachine t = getBind();
-        EnergyItemHelper.setState(stack, t.packData());
+        EnergyItemHelper.setState(stack, t.maxStorage, t.maxReceive, t.maxExtract);
     }
 
 }

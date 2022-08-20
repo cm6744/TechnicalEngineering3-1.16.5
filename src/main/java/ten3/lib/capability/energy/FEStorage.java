@@ -21,7 +21,7 @@ public class FEStorage implements IEnergyStorage {
         if (!canReceive()) {
             return 0;
         }
-        int energyReceived = Math.min(capacity - getEnergyStored(), Math.min(this.maxReceive, maxReceive));
+        int energyReceived = Math.min(getMaxEnergyStored() - getEnergyStored(), Math.min(getMaxReceive(), maxReceive));
         if (!simulate) {
             translateEnergy(energyReceived);
         }
@@ -34,7 +34,7 @@ public class FEStorage implements IEnergyStorage {
         if (!canExtract()) {
             return 0;
         }
-        int energyExtracted = Math.min(getEnergyStored(), Math.min(this.maxExtract, maxExtract));
+        int energyExtracted = Math.min(getEnergyStored(), Math.min(getMaxExtract(), maxExtract));
         if (!simulate) {
             translateEnergy(-energyExtracted);
         }
@@ -44,6 +44,14 @@ public class FEStorage implements IEnergyStorage {
     @Override
     public int getEnergyStored() {
         return pro_energy;
+    }
+
+    public int getMaxReceive() {
+        return maxReceive;
+    }
+
+    public int getMaxExtract() {
+        return maxExtract;
     }
 
     public void translateEnergy(int diff) {

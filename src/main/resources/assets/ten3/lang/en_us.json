@@ -59,6 +59,7 @@
   "ten3.redstone_conductor": "Redstone Conductor",
   "ten3.redstone_storer": "Redstone Storer",
   "ten3.redstone_converter": "Redstone Converter",
+  "ten3.bizarrerie": "Bizarrerie",
 
   "ten3.engine_extraction": "Extraction Engine",
   "ten3.engine_metal": "Metal Engine",
@@ -83,39 +84,25 @@
 
   "ten3.shift": "Press [SHIFT] to see more",
 
-  "ten3.speed_upgrade": "High-speed Conduction Upgrade",
-  "ten3.energy_upgrade": "Efficient Suppression Upgrade",
-  "ten3.storage_upgrade": "Redstone Charging Upgrade",
-  "ten3.transfer_upgrade": "Dynamic Transference Upgrade",
-  "ten3.item_upgrade": "Item Pump Upgrade",
-  "ten3.gem_upgrade": "Gem Burner Upgrade",
-
-  "ten3.info.upgrade.limit": "Install Limit: ",
-  "ten3.info.speed_upgrade.0": "Machine: Efficient UP",
-  "ten3.info.speed_upgrade.1": "Make the machine run faster.",
-  "ten3.info.speed_upgrade.2": "But also, it will spend more energy",
-  "ten3.info.energy_upgrade.0": "Machine: Efficient DOWN",
-  "ten3.info.energy_upgrade.1": "Make the machine run more slowly.",
-  "ten3.info.energy_upgrade.2": "Because of that, it will spend less energy",
-  "ten3.info.storage_upgrade.0": "Machine: Capacity UP",
-  "ten3.info.storage_upgrade.1": "Extra capacity for your machine!",
-  "ten3.info.transfer_upgrade.0": "Machine: Transference Speed UP",
-  "ten3.info.transfer_upgrade.1": "Make the machine's max energy input and output higher.",
-  "ten3.info.augmented_levelup.0": "Machine: Level UP to Augmented",
-  "ten3.info.augmented_levelup.1": "Another two upgrade slots!",
-  "ten3.info.powered_levelup.0": "Machine: Level UP to Powered",
-  "ten3.info.powered_levelup.1": "Another two upgrade slots!",
-
-  "ten3.info.too_much_upgrades": "This machine has too many upgrades! Please increase its level...",
-  "ten3.info.not_support_upgrade": "This machine don't support the update!",
+  "ten3.info.too_much_upgrades": "This machine has too many upgrades!",
+  "ten3.info.not_support_upgrade": "This machine doesn't support the update!",
   "ten3.info.upgrade_successfully": " installed successfully.",
 
   "ten3.augmented_levelup": "Augmented Levelup Kit",
   "ten3.powered_levelup": "Powered Levelup Kit",
+  "ten3.relic_levelup": "Ancient Levelup Kit",
+
+  "ten3.augmented_levelup.0": "Provide extra 1 upgrade slot. 20% cap up.",
+  "ten3.powered_levelup.0": "Provide extra 2 upgrade slots, 35% cap up.",
+  "ten3.relic_levelup.0": "Provide no upgrade slots, 100% cap up.",
 
   "ten3.level.0": " (Common)",
-  "ten3.level.1": " (Augmented)",
-  "ten3.level.2": " (Powered)",
+  "ten3.level.1": " (Hard)",
+  "ten3.level.2": " (Rapid)",
+  "ten3.level.3": " (Powerful)",
+  "ten3.level.4": " (Shining)",
+  "ten3.level.5": " (Strong)",
+  "ten3.level.6": " (Super)",
 
   "ten3.info.spanner.dire.energy": "Energy Transference: ",
   "ten3.info.spanner.dire.item": "Item Transference: ",
@@ -143,12 +130,13 @@
   "ten3.info.bar_energy": "Efficient: ",
   "ten3.info.bar_upgrade": "Upgrades: ",
   "ten3.info.bar_energy_fact": "Actual Efficient: ",
-  "ten3.info.bar_energy_max": "Max Efficient: ",
-  "ten3.info.bar_energy_in_max": "Max Energy Input Efficient: ",
-  "ten3.info.bar_energy_out_max": "Max Energy Output Efficient: ",
-  "ten3.info.bar_item_in_max": "Max Item Input Efficient: ",
-  "ten3.info.bar_item_out_max": "Max Item Output Efficient: ",
+  "ten3.info.bar_energy_max": "Max Efficiency: ",
+  "ten3.info.bar_energy_in_max": "Max Energy Input Efficiency: ",
+  "ten3.info.bar_energy_out_max": "Max Energy Output Efficiency: ",
+  "ten3.info.bar_item_in_max": "Max Item Input Efficiency: ",
+  "ten3.info.bar_item_out_max": "Max Item Output Efficiency: ",
   "ten3.locked_slot": "This slot hasn't been unlocked yet.",
+
   "ten3.jei_addition_chance": "Addition Chance: ",
 
   "ten3.info.smelter.0": "Turn energy into heats.",
@@ -193,5 +181,26 @@
   "ten3.info.quarry.1": "It needs a pickaxe...",
   "ten3.info.quarry.2": "Pay attention to your UNDERGROUND!",
 
-  "ten3.info.psionicant.0": "Explore..."
+  "ten3.info.psionicant.0": "Explore...",
+
+
+
+  "ten3.adv.root": "Technical Engineering 3",
+  "ten3.adv.root.0": "And the dream begins.",
+  "ten3.adv.copper": "Isn't it copper?",
+  "ten3.adv.copper.0": "Get a copper ore from caves.",
+  "ten3.adv.engine": "Fire Energy",
+  "ten3.adv.engine.0": "Craft a extraction engine.",
+  "ten3.adv.compress": "Don't put your hand in!",
+  "ten3.adv.compress.0": "Craft a compressor.",
+  "ten3.adv.crush": "Double ores",
+  "ten3.adv.crush.0": "Craft a pulverizer, and you'll get double ores.",
+  "ten3.adv.cable": "Where will it go?",
+  "ten3.adv.cable.0": "Craft some glass cables.",
+  "ten3.adv.cell": "Where it will go.",
+  "ten3.adv.cell.0": "Craft a glass cell to storage energy.",
+  "ten3.adv.span": "Machine engineer",
+  "ten3.adv.span.0": "Spanner, it helps you to option machines.",
+  "ten3.adv.relic": "Present and past",
+  "ten3.adv.relic.0": "Get a relic levelup kit, wherever."
 }

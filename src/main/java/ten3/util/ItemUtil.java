@@ -1,10 +1,25 @@
 package ten3.util;
 
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ItemUtil {
+
+    public static ItemStack[] merge(ItemStack i1, ItemStack i2) {
+
+        Inventory inv = new Inventory(2);
+        InvWrapper wrapper = new InvWrapper(inv);
+        inv.setInventorySlotContents(0, i1.copy());
+        ItemStack sr = wrapper.insertItem(0, i2.copy(), false);
+        if(sr.isEmpty()) {
+            return new ItemStack[] {inv.getStackInSlot(0)};
+        }
+        return new ItemStack[] {inv.getStackInSlot(0), sr};
+
+    }
 
     public static void damage(ItemStack stack, World world, int am) {
 

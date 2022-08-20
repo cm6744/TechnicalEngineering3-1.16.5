@@ -11,10 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -26,9 +28,7 @@ import net.minecraftforge.items.IItemHandler;
 import ten3.TConst;
 import ten3.core.block.Machine;
 import ten3.core.block.MachinePostEvent;
-import ten3.core.item.upgrades.LevelupItem;
 import ten3.core.item.upgrades.UpgradeItem;
-import ten3.core.machine.cable.CableTile;
 import ten3.util.DireUtil;
 import ten3.lib.capability.energy.EnergyTransferor;
 import ten3.lib.capability.energy.FEStorageTile;
@@ -65,6 +65,20 @@ public abstract class CmTileMachine extends CmTileEntity {
         return ExcUtil.safeGetRecipe(world, type, new Inventory(stacks)).orElse(null);
     }
 
+    public boolean hasRcpUseThisItem(IRecipeType<? extends IRecipe<IInventory>> type, ItemStack stack) {
+        Collection<? extends IRecipe<IInventory>> recipes = ExcUtil.safeGetRecipes(world, type);
+        final boolean[] ret = new boolean[1];
+        recipes.stream().forEach((r) -> {
+            NonNullList<Ingredient> ings = r.getIngredients();
+            ings.stream().forEach((i) -> {
+                if(i.test(stack)) {
+                    ret[0] = true;
+                }
+            });
+        });
+        return ret[0];
+    }
+
     //data poses.
     //how to use them:
     //data.set(energy<-index, xxx<-value)
@@ -83,7 +97,8 @@ public abstract class CmTileMachine extends CmTileEntity {
     public static final int FACE = 11;
     public static final int EFF_AUC = 12;
     public static final int EFF = 13;
-    public static final int level = 15;
+    public static final int LVL = 15;
+    public static final int UPGSIZE = 16;
     //public static int tranMode = 11;
 
     public int efficientIn;
@@ -102,7 +117,8 @@ public abstract class CmTileMachine extends CmTileEntity {
     public int maxStorage;
     public int defaultModeEne;
     public int defaultModeItm;
-    public int levelIn = 0;
+    public int levelIn;
+    public int upgSize;
 
     public int initialStorage;//initial vars won't be change!
     public int initialReceive;//initial vars won't be change!
@@ -110,6 +126,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     public int initialItemReceive;
     public int initialItemExtract;
     public int initialFacing;
+    public int initialUpgSize = 1;
 
     public int upgSlotFrom = 34;
     public int upgSlotTo = 39;
@@ -122,7 +139,7 @@ public abstract class CmTileMachine extends CmTileEntity {
         constructorDo();
     }
 
-    CmTileMachine(TileEntityType<?> type, String fullTranslationKey) {
+    public CmTileMachine(TileEntityType<?> type, String fullTranslationKey) {
         super(type, fullTranslationKey);
         constructorDo();
     }
@@ -150,8 +167,9 @@ public abstract class CmTileMachine extends CmTileEntity {
         defaultModeEne = defene;
         defaultModeItm = defitm;
         initialEfficientIn = efficientIn = eff;
-        initialItemExtract = maxExtractItem = 1;
-        initialItemReceive = maxReceiveItem = 1;
+        initialItemExtract = maxExtractItem = 8;
+        initialItemReceive = maxReceiveItem = 8;
+        initialUpgSize = upgSize = 1;
 
     }
 
@@ -208,14 +226,8 @@ public abstract class CmTileMachine extends CmTileEntity {
         nbtManager.wdt(nbt);
     }
 
-    public PacketCapData packData() {
-        return PacketCapData.of(maxExtract, maxReceive, maxStorage, efficientIn, levelIn);
-    }
-
     public void postProgressUp() {
-
         progressor.progressOn(data, getActual());
-
     }
 
     private Queue<Direction> qr = Queues.newArrayDeque(Lists.newArrayList(Direction.values()));
@@ -233,7 +245,7 @@ public abstract class CmTileMachine extends CmTileEntity {
         if(slot >= upgSlotFrom && slot <= upgSlotTo) {
             return false;
         }
-        if((stack.getItem() instanceof UpgradeItem) && !(stack.getItem() instanceof LevelupItem)) {
+        if((stack.getItem() instanceof UpgradeItem)) {
             return false;
         }
 
@@ -241,44 +253,35 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     }
 
-    public int nowUpgSize() {
-        return (levelIn + 1) * 2;
-    }
-
-    public int maxUpgSize() {
-        return 6;
-    }
-
     private void upgradeUpdate(boolean startTick) {
 
-        for(int i = 0; i < nowUpgSize(); i++) {
+        for(int i = 0; i < upgSize && startTick; i++) {
             ItemStack iks = inventory.getStackInSlot(i + upgSlotFrom);
             Item ik = iks.getItem();
 
             if(ik instanceof UpgradeItem) {
-                SlotCm sl = inventory.match(i + upgSlotFrom);
-                if(sl instanceof SlotUpgCm) {
-                    ((SlotUpgCm) sl).lock(startTick);
-                }
-                if(startTick) {
-                    ((UpgradeItem) ik).effect(this);
-                }
-                else {
-                    efficientIn = initialEfficientIn;
-                    maxExtractItem = initialItemExtract;
-                    maxReceiveItem = initialItemReceive;
-                    maxExtract = initialExtract;
-                    maxReceive = initialReceive;
-                    maxStorage = initialStorage;//reset all, but data storage them to client!
-                }
+                ((UpgradeItem) ik).effect(this);
             }
         }
+
+        if(!startTick) {
+            efficientIn = initialEfficientIn;
+            maxExtractItem = initialItemExtract;
+            maxReceiveItem = initialItemReceive;
+            maxExtract = initialExtract;
+            maxReceive = initialReceive;
+            maxStorage = initialStorage;//reset all, but data storage them to client!
+            upgSize = initialUpgSize;
+            levelIn = 0;
+        }
+
+        //levelIn = upgs;
 
     }
 
     public boolean hasUpgrade(UpgradeItem item) {
 
-        for(int i = 0; i < nowUpgSize(); i++) {
+        for(int i = 0; i < upgSize; i++) {
             ItemStack iks = inventory.getStackInSlot(i + upgSlotFrom);
             Item ik = iks.getItem();
             if(ik == item) {
@@ -289,9 +292,12 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     }
 
+    int cacheTimeActive;
+
     @Override
     public void update() {
 
+        upgradeUpdate(false);
         upgradeUpdate(true);
 
         component = getDisplayWith();
@@ -303,7 +309,8 @@ public abstract class CmTileMachine extends CmTileEntity {
         data.set(EFF, efficientIn);
         data.set(I_REC, maxReceiveItem);
         data.set(I_EXT, maxExtractItem);
-        data.set(level, levelIn);
+        data.set(LVL, levelIn);
+        data.set(UPGSIZE, upgSize);
 
         data.set(FACE, initialFacing);
         setFace(DireUtil.intToDire(initialFacing));
@@ -320,7 +327,11 @@ public abstract class CmTileMachine extends CmTileEntity {
             data.set(EFF_AUC, (int) (actualEffPercent * efficientIn));
         }
 
-        setActive(getActualPercent() > 0 && checkCanRun());
+        if(getActualPercent() > 0 && checkCanRun()) {
+            cacheTimeActive = 12;
+        }
+        cacheTimeActive--;
+        setActive(cacheTimeActive > 0);
 
         //tran items
         if(checkCanRun() && isActive()) {
@@ -349,21 +360,13 @@ public abstract class CmTileMachine extends CmTileEntity {
     }
 
     protected void transferItem() {
-        if(getTileAliveTime() % 2 == 0) {
+        if(getTileAliveTime() % 6 == 0) {
             qr.offer(qr.remove());
             for(Direction d : qr) {
                 itr.transferTo(d);
                 itr.transferFrom(d);
             }
         }
-    }
-
-    //the son classes will override update,
-    //and super.update will run firstly.
-    //if it's not in endTick, upgrades won't have effects on.
-    @Override
-    public void endTick() {
-        upgradeUpdate(false);
     }
 
     public int getActual() {

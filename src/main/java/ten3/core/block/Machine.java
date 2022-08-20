@@ -1,6 +1,7 @@
 package ten3.core.block;
 
 import com.google.common.collect.Lists;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

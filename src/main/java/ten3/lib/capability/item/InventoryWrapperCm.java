@@ -31,13 +31,16 @@ public class InventoryWrapperCm extends InvWrapper {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
 
-        if(di == null
+        int cap = Math.min(tile.maxReceiveItem, stack.getCount());
+        ItemStack insertStack = stack.copy().split(cap);
+
+        if((di == null
                 || tile.direCheckItem(di) == FaceOption.IN
                 || tile.direCheckItem(di) == FaceOption.BE_IN
-                || tile.direCheckItem(di) == FaceOption.BOTH
+                || tile.direCheckItem(di) == FaceOption.BOTH)
         ) {
-            if(tile.inventory.isIn(slot) && tile.inventory.isUsed(slot) && isItemValid(slot, stack)) {
-                return super.insertItem(slot, stack, simulate);
+            if(tile.inventory.isIn(slot) && tile.inventory.isUsed(slot) && isItemValid(slot, insertStack)) {
+                return super.insertItem(slot, insertStack, simulate);
             }
         }
 
@@ -68,6 +71,8 @@ public class InventoryWrapperCm extends InvWrapper {
     @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
+
+        amount = Math.min(tile.maxExtractItem, amount);
 
         if(di == null
                 || tile.direCheckItem(di) == FaceOption.OUT

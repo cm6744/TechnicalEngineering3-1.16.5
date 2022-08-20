@@ -2,6 +2,8 @@ package ten3.core.recipe;
 
 import com.google.common.collect.Lists;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -74,7 +76,7 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     }
 
     public List<ItemStack> output() {
-        return Lists.newArrayList(getRecipeOutput().copy());
+        return Lists.newArrayList(getCraftingResult(new Inventory()));
     }
 
     @Override
@@ -109,8 +111,9 @@ public class SingleRecipe implements OpportunityRecipe<IInventory> {
     }
 
     @Override
-    public String condition() {
-        return null;
+    public int inputLimit(ItemStack stack)
+    {
+        return ingredient.limit;
     }
 
 }

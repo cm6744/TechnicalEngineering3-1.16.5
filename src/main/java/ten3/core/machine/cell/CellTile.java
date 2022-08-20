@@ -15,8 +15,8 @@ public class CellTile extends CmTileMachine {
 
         setCap(getCapacity(), FaceOption.BE_IN, FaceOption.OFF, 0);
 
-        addSlot(new SlotCm(inventory, 0, 61, 46, null, true, true));
-        addSlot(new SlotCm(inventory, 1, 97, 46, null, true, true));
+        addSlot(new SlotCm(inventory, 0, 42, 32, null, true, true));
+        addSlot(new SlotCm(inventory, 1, 115, 32, null, true, true));
 
     }
 

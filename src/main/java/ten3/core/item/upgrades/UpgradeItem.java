@@ -13,12 +13,24 @@ import java.util.List;
 
 public abstract class UpgradeItem extends DefItem {
 
-    public UpgradeItem() {
+    double percent;
+
+    public UpgradeItem(double per) {
 
         super(1);
+        percent = per;
 
     }
 
-    public abstract boolean effect(CmTileMachine tile);
+    public boolean effect(CmTileMachine tile) {
+        tile.efficientIn += tile.initialEfficientIn * percent;
+        tile.maxStorage += tile.initialStorage * percent;
+        tile.maxReceive += tile.initialReceive * percent;
+        tile.maxExtract += tile.initialExtract * percent;
+        tile.maxReceiveItem += tile.initialItemReceive * percent;
+        tile.maxExtractItem += tile.initialItemExtract * percent;
+        tile.levelIn++;
+        return true;
+    }
 
 }

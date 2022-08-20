@@ -12,8 +12,8 @@ public interface IBaseRecipeCm<T extends IInventory> extends IRecipe<T> {
 
     int time();
 
-    String condition();
-
     List<ItemStack> output();
+
+    int inputLimit(ItemStack stack);
 
 }

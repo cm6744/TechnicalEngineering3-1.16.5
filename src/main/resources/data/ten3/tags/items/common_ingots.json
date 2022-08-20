@@ -3,7 +3,8 @@
   "values": [
     "minecraft:iron_ingot",
     "minecraft:gold_ingot",
-    "ten3:tin_ingot",
-    "ten3:copper_ingot"
+    "#forge:ingots/tin",
+    "#forge:ingots/copper",
+    "#forge:ingots/nickel"
   ]
 }

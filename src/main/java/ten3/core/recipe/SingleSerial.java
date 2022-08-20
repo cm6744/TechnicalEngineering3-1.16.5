@@ -84,13 +84,21 @@ public class SingleSerial<T extends SingleRecipe> extends BaseSerial implements 
 
     public static CmItemList getIngJSON(JsonObject json) {
 
-        return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient"));
+        try {
+            return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient"));
+        } catch(Exception e) {
+            return new CmItemList();
+        }
 
     }
 
     public static CmItemList getIngJSON(JsonObject json, int index) {
 
-        return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient" + index));
+        try {
+            return CmItemList.parseFrom(JSONUtils.getJsonObject(json, "ingredient" + index));
+        } catch(Exception e) {
+            return new CmItemList();
+        }
 
     }
 

@@ -56,7 +56,7 @@ public class DefItem extends Item {
 
         for(int i = 0; true; i++) {
             //*getPATH!
-            String k = "ten3.info."+ getRegistryName().getPath() +"."+i;
+            String k = "ten3."+ getRegistryName().getPath() +"."+i;
             ITextComponent ttc = KeyUtil.translated(KeyUtil.GOLD, k);
             if(ttc.getString().equals(k)) break;
 

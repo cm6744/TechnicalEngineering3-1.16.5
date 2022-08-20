@@ -6,19 +6,16 @@ import net.minecraft.item.ItemStack;
 import ten3.lib.tile.CmTileEntity;
 import ten3.lib.wrapper.SlotCm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryCm extends Inventory {
 
     List<SlotCm> slots;
 
-    public InventoryCm(int size) {
+    public InventoryCm(int size, CmTileEntity t) {
 
         super(size);
-
-    }
-
-    public void postList(CmTileEntity t) {
         slots = t.slots;
     }
 
@@ -32,6 +29,16 @@ public class InventoryCm extends Inventory {
             }
         }
         return false;
+    }
+
+    public List<ItemStack> getStackInRange(int fr, int to) {
+        List<ItemStack> lst = new ArrayList<>();
+        for(int i = fr; i<= to; i++) {
+            if(!getStackInSlot(i).isEmpty()) {
+                lst.add(getStackInSlot(i));
+            }
+        }
+        return lst;
     }
 
     public SlotCm match(int index) {

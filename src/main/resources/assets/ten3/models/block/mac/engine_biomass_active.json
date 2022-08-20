@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "engines",
 	"textures": {
 		"0": "ten3:machine/engine/engine_biomass",
 		"1": "ten3:machine/engine/engine_biomass_bottom",

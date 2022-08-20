@@ -24,7 +24,6 @@ public class MacNBTManager {
         data.set(PROGRESS, nbt.getInt("progress"));
         data.set(MAX_PROGRESS, nbt.getInt("maxProgress"));
         data.set(ENERGY, nbt.getInt("energy"));
-        data.set(MAX_ENERGY, nbt.getInt("maxEnergy"));
         data.set(FUEL, nbt.getInt("fuel"));
         data.set(MAX_FUEL, nbt.getInt("maxFuel"));
 
@@ -46,7 +45,6 @@ public class MacNBTManager {
         nbt.putInt("progress", data.get(PROGRESS));
         nbt.putInt("maxProgress", data.get(MAX_PROGRESS));
         nbt.putInt("energy", data.get(ENERGY));
-        nbt.putInt("maxEnergy", data.get(MAX_ENERGY));
         nbt.putInt("fuel", data.get(FUEL));
         nbt.putInt("maxFuel", data.get(MAX_FUEL));
 

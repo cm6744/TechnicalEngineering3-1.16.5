@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ten3:powered_tin_ingot",
-    "ten3:chlorium_ingot"
+    "#forge:ingots/chlorium",
+    "#forge:ingots/powered_tin"
   ]
 }

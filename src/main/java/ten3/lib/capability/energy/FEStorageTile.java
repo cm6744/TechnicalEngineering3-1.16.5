@@ -34,6 +34,18 @@ public class FEStorageTile extends FEStorage {
     }
 
     @Override
+    public int getMaxExtract()
+    {
+        return tile.maxExtract;
+    }
+
+    @Override
+    public int getMaxReceive()
+    {
+        return tile.maxReceive;
+    }
+
+    @Override
     public int extractEnergy(int extract, boolean simulate) {
         if(canExtract()) {
             return super.extractEnergy(extract, simulate);

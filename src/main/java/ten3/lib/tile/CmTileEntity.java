@@ -28,10 +28,10 @@ import java.util.ArrayList;
 public abstract class CmTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     public IntArrayCm data = ContInit.crt();
-    public InventoryCm inventory = new InventoryCm(40);
     public ITextComponent component;
     public String id;
     public ArrayList<SlotCm> slots = new ArrayList<>();
+    public InventoryCm inventory = new InventoryCm(40, this);
 
     boolean init;
 
@@ -45,7 +45,7 @@ public abstract class CmTileEntity extends TileEntity implements ITickableTileEn
         id = key;
     }
 
-    CmTileEntity(TileEntityType<?> type, String fullTranslationKey) {
+    public CmTileEntity(TileEntityType<?> type, String fullTranslationKey) {
         super(type);
         component = KeyUtil.translated(fullTranslationKey);
     }
@@ -145,7 +145,6 @@ public abstract class CmTileEntity extends TileEntity implements ITickableTileEn
                 }
             }
             else {//after init
-                inventory.postList(this);
                 update();
                 endTick();
             }
