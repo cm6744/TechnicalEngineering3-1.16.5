@@ -15,6 +15,7 @@ import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
 import ten3.TConst;
 import ten3.core.machine.useenergy.compressor.CompressorScreen;
+import ten3.core.machine.useenergy.indfur.IndfurScreen;
 import ten3.core.machine.useenergy.psionicant.PsionicantScreen;
 import ten3.core.machine.useenergy.pulverizer.PulverizerScreen;
 import ten3.core.machine.useenergy.smelter.FurnaceScreen;
@@ -31,6 +32,7 @@ public class TEJeiPlugins implements IModPlugin {
         addRecipe(registration, "compressor");
         addRecipeSM(registration, "smelter");
         addRecipe(registration, "psionicant");
+        addRecipe(registration, "induction_furnace");
     }
 
     private void addRecipe(IRecipeRegistration registration, String name) {
@@ -51,7 +53,8 @@ public class TEJeiPlugins implements IModPlugin {
         registration.addRecipeCategories(new TECategorySgAddition( "pulverizer", 27, 32));
         registration.addRecipeCategories(new TECategorySg( "compressor", 27, 63));
         registration.addRecipeCategories(new TECategorySmelt("smelter", 27, 0));
-        registration.addRecipeCategories(new TECategorySgMTS("psionicant", 27, 0));
+        registration.addRecipeCategories(new TECategorySg2("psionicant", 27, 0));
+        registration.addRecipeCategories(new TECategorySg3("induction_furnace", 27, 0));
     }
 
     @Override
@@ -61,10 +64,15 @@ public class TEJeiPlugins implements IModPlugin {
         addArea(registration, CompressorScreen.class, "compressor");
         addArea(registration, FurnaceScreen.class, "smelter");
         addArea(registration, PsionicantScreen.class, "psionicant");
+        addArea(16, registration, IndfurScreen.class, "induction_furnace");
     }
 
     private void addArea(IGuiHandlerRegistration registration, Class<? extends ContainerScreen<?>> clazz, String name) {
-        registration.addRecipeClickArea(clazz, 76, 35, 22, 16,
+        addArea(0, registration, clazz, name);
+    }
+
+    private void addArea(int xOff, IGuiHandlerRegistration registration, Class<? extends ContainerScreen<?>> clazz, String name) {
+        registration.addRecipeClickArea(clazz, 76 + xOff, 35, 22, 16,
                 new ResourceLocation(TConst.modid, name));
     }
 
@@ -75,6 +83,7 @@ public class TEJeiPlugins implements IModPlugin {
         addCatalyst(registration, "compressor");
         addCatalyst(registration, "smelter");
         addCatalyst(registration, "psionicant");
+        addCatalyst(registration, "induction_furnace");
     }
 
     private void addCatalyst(IRecipeCatalystRegistration registration, String name) {

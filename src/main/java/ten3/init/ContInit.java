@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -27,6 +28,8 @@ import ten3.core.machine.useenergy.compressor.CompressorScreen;
 import ten3.core.machine.useenergy.compressor.CompressorTile;
 import ten3.core.machine.useenergy.farm.FarmScreen;
 import ten3.core.machine.useenergy.farm.FarmTile;
+import ten3.core.machine.useenergy.indfur.IndfurScreen;
+import ten3.core.machine.useenergy.indfur.IndfurTile;
 import ten3.core.machine.useenergy.mobrip.MobRipScreen;
 import ten3.core.machine.useenergy.mobrip.MobRipTile;
 import ten3.core.machine.useenergy.psionicant.PsionicantScreen;
@@ -66,6 +69,7 @@ public class ContInit {
         regCont(new MobRipTile("machine_mob_ripper"));
         regCont(new QuarryTile("machine_quarry"));
         regCont(new PsionicantTile("machine_psionicant"));
+        regCont(new IndfurTile("machine_induction_furnace"));
 
         regCont(new CellTile("cell_glass"));
         regCont(new CellTileGolden("cell_golden"));
@@ -126,6 +130,7 @@ public class ContInit {
         bindScr("machine_mob_ripper", MobRipScreen::new);
         bindScr("machine_quarry", QuarryScreen::new);
         bindScr("machine_psionicant", PsionicantScreen::new);
+        bindScr("machine_induction_furnace", IndfurScreen::new);
 
         bindScr("cell_glass", CellScreen::new);
         bindScr("cell_golden", CellScreen::new);

@@ -1,4 +1,4 @@
-package ten3.core.block;
+package ten3.core.machine;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -9,7 +9,10 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import ten3.core.item.Spanner;
 import ten3.core.item.upgrades.UpgradeItem;
+import ten3.lib.tile.CmTileEntity;
+import ten3.lib.tile.option.Level;
 import ten3.lib.tile.option.RedstoneMode;
+import ten3.lib.tile.recipe.CmTileMachineRadiused;
 import ten3.util.ItemUtil;
 import ten3.core.network.Network;
 import ten3.core.network.packets.PTCInfoClientPack;
@@ -56,7 +59,7 @@ public class MachinePostEvent {
                 ItemUtil.setTag(i, "bindY", pos.getY());
                 ItemUtil.setTag(i, "bindZ", pos.getZ());
             }
-            updateToClient(tile.direCheckEnergy(d), tile.direCheckItem(d), tile.data.get(RED_MODE), tile.levelIn, pos, d);
+            updateToClient(tile, d, pos);
             return false;
         }
         else if(i.getItem() instanceof UpgradeItem) {
@@ -70,13 +73,19 @@ public class MachinePostEvent {
                     i.shrink(1);
                 }
             }
-            else {
+            else if(!giveSuc) {
                 player.sendStatusMessage(
                         KeyUtil.translated(KeyUtil.RED, "ten3.info.too_much_upgrades"),
                         false
                 );
             }
-            updateToClient(tile.direCheckEnergy(d), tile.direCheckItem(d), tile.data.get(RED_MODE), tile.levelIn, pos, d);
+            else {
+                player.sendStatusMessage(
+                        KeyUtil.translated(KeyUtil.RED, "ten3.info.not_support_upgrade"),
+                        false
+                );
+            }
+            updateToClient(tile, d, pos);
             return false;
         }
 
@@ -84,8 +93,13 @@ public class MachinePostEvent {
 
     }
 
-    public static void updateToClient(int ene, int itm, int res, int lv, BlockPos pos, Direction d) {
-        Network.sendToClient(new PTCInfoClientPack(ene, itm, res, lv, pos, d));
+    public static void updateToClient(int ene, int itm, int res, int lv, int rd, BlockPos pos, Direction d) {
+        Network.sendToClient(new PTCInfoClientPack(ene, itm, res, lv, rd, pos, d));
+    }
+
+    public static void updateToClient(CmTileMachine tile, Direction d, BlockPos pos) {
+        updateToClient(tile.direCheckEnergy(d), tile.direCheckItem(d), tile.data.get(RED_MODE),
+                tile.levelIn, tile instanceof CmTileMachineRadiused ? ((CmTileMachineRadiused) tile).radius : 0, pos, d);
     }
 
 }

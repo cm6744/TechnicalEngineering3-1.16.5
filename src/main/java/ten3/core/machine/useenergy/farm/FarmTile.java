@@ -23,6 +23,7 @@ public class FarmTile extends CmTileMachineRadiused {
         super(name);
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OUT, 10);
+        initialRadius = 4;
 
         SlotCustomCm.Condition onlySeed = (s) -> {
             if(s.getItem() instanceof BlockItem) {
@@ -50,18 +51,6 @@ public class FarmTile extends CmTileMachineRadiused {
     @Override
     public Type typeOf() {
         return Type.MACHINE_EFFECT;
-    }
-
-    @Override
-    public int getRadiusFromLevel(int levelIn)
-    {
-        return (levelIn + 1) * 3;
-    }
-
-    @Override
-    public boolean isInWorkRadius(BlockPos pos)
-    {
-        return pos.withinDistance(this.pos, radius);
     }
 
     public void update() {

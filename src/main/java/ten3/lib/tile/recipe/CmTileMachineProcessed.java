@@ -2,13 +2,27 @@ package ten3.lib.tile.recipe;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 import ten3.core.recipe.IBaseRecipeCm;
+import ten3.core.recipe.MTSRecipe;
+import ten3.core.recipe.MTSSerial;
 import ten3.core.recipe.OpportunityRecipe;
+import ten3.init.RecipeInit;
+import ten3.lib.capability.item.InventoryCm;
 import ten3.lib.tile.CmTileMachine;
 import ten3.lib.tile.option.Type;
+import ten3.util.ExcUtil;
+import ten3.util.ItemUtil;
+import ten3.util.KeyUtil;
+
+import java.util.Collection;
+import java.util.List;
 
 public abstract class CmTileMachineProcessed extends CmTileMachine {
 
@@ -29,11 +43,7 @@ public abstract class CmTileMachineProcessed extends CmTileMachine {
 
     @Override
     public boolean customFitStackIn(ItemStack s, int slot) {
-        IRecipe<IInventory> rc = getRcp(recipeType, s);
-        if(slot == 0) {
-            return world != null && rc != null;
-        }
-        return false;
+        return getRcp(recipeType, s) != null;
     }
 
     SlotInfo slotInfo;
@@ -52,8 +62,7 @@ public abstract class CmTileMachineProcessed extends CmTileMachine {
 
     //need to override sometimes
     public void cacheRcp() {
-        ItemStack ext = inventory.getStackInSlot(0);
-        recipeNow = getRcp(recipeType, ext);
+        recipeNow = getRcp(recipeType, inventory);
     }
 
     public void shrinkItems() {
@@ -95,7 +104,10 @@ public abstract class CmTileMachineProcessed extends CmTileMachine {
             data.set(MAX_PROGRESS, getTimeCook());
 
             if(!itr.selfGive(result, slotInfo.ots, slotInfo.ote, true)
-            || !itr.selfGive(fullAdt, slotInfo.ots, slotInfo.ote, true)) return;
+            || !itr.selfGive(fullAdt, slotInfo.ots, slotInfo.ote, true)) {
+                setActive(false);
+                return;
+            }
 
             data.translate(ENERGY, -getActual());
             postProgressUp();

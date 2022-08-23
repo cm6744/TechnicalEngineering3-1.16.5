@@ -25,7 +25,9 @@ public class DefBlock extends Block {
                 .setRequiresTool()
                 .setLightLevel((state) -> light)
                 .sound(s);
-        if(!solid) p.notSolid();
+        if(!solid) {
+            p.notSolid();
+        }
 
         return p;
 

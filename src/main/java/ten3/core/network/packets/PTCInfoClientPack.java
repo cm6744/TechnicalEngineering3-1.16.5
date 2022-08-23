@@ -16,6 +16,7 @@ public class PTCInfoClientPack {
     int itm;
     int res;
     int level;
+    int rd;
     BlockPos pos;
     Direction d;
 
@@ -25,18 +26,20 @@ public class PTCInfoClientPack {
         itm = b.readInt();
         res = b.readInt();
         level = b.readInt();
+        rd = b.readInt();
         pos = b.readBlockPos();
         d = b.readEnumValue(Direction.class);
 
     }
 
-    public PTCInfoClientPack(int e, int i, int r, int lv, BlockPos p, Direction d) {
+    public PTCInfoClientPack(int e, int i, int r, int lv, int rd, BlockPos p, Direction d) {
 
         ene = e;
         itm = i;
         res = r;
         pos = p;
         level = lv;
+        this.rd = rd;
         this.d = d;
 
     }
@@ -47,6 +50,7 @@ public class PTCInfoClientPack {
         b.writeInt(itm);
         b.writeInt(res);
         b.writeInt(level);
+        b.writeInt(rd);
         b.writeBlockPos(pos);
         b.writeEnumValue(d);
 
@@ -87,6 +91,7 @@ public class PTCInfoClientPack {
         ClientHolder.item.put(pos, item);
         ClientHolder.redstone.put(pos, redstone);
         ClientHolder.level.put(pos, lev);
+        ClientHolder.radius.put(pos, rd);
 
     }
 

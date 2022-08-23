@@ -20,6 +20,7 @@ public class BeaconTile extends CmTileMachineRadiused {
         super(name);
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OFF, 300);
+        initialRadius = 32;
 
         addSlot(new SlotCustomCm(inventory, 0, 79, 31, BrewingRecipeRegistry::isValidInput, false, false));
 
@@ -28,18 +29,6 @@ public class BeaconTile extends CmTileMachineRadiused {
     @Override
     public Type typeOf() {
         return Type.MACHINE_EFFECT;
-    }
-
-    @Override
-    public int getRadiusFromLevel(int levelIn)
-    {
-        return (levelIn + 1) * 32;
-    }
-
-    @Override
-    public boolean isInWorkRadius(BlockPos pos)
-    {
-        return pos.withinDistance(this.pos, radius);
     }
 
     public void update() {

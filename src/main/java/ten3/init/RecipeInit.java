@@ -26,7 +26,8 @@ public class RecipeInit {
 
         regRcp(new SingleSerial<>(SingleRecipe::new, "pulverizer"));
         regRcp(new SingleSerial<>(SingleRecipe::new, "compressor"));
-        regRcp(new MTSSerial<>(MTSRecipe::new, "psionicant"));
+        regRcp(new MTSSerial<>(MTSRecipe::new, "psionicant", 2));
+        regRcp(new MTSSerial<>(MTSRecipe::new, "induction_furnace", 3));
     }
 
     public static void regRcp(CmSerializer<?> s) {

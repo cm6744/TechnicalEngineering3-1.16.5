@@ -57,7 +57,10 @@ public class HudSpanner {
         IFormattableTextComponent c2 = KeyUtil.translated("ten3.info.spanner.dire.item");
         IFormattableTextComponent c3 = KeyUtil.translated("ten3.info.spanner.dire.redstone");
         ((CmTileMachine) t).levelIn = ExcUtil.safeInt(ClientHolder.level.get(pos));
-        ITextComponent c0 = ((CmTileMachine) t).getDisplayWith();
+        ITextComponent c0 = ((CmTileMachine) t).getDisplayWith()
+                .appendSibling(KeyUtil.make(" ("))
+                .appendSibling(KeyUtil.translated("dire." + d.getName2()))
+                .appendSibling(KeyUtil.make(")"));
 
         ArrayList<Integer> ene = ClientHolder.energy.get(pos);
         ArrayList<Integer> itm = ClientHolder.item.get(pos);
@@ -89,7 +92,8 @@ public class HudSpanner {
         tooltips.add(c0);
         tooltips.add(c1);
         tooltips.add(c2);
-        tooltips.add(c3);
+        tooltips.add(KeyUtil.translated("ten3.info.spanner.work_radius")
+                .appendSibling(KeyUtil.make(String.valueOf(ClientHolder.radius.get(pos)))));
 
         RenderHelper.renderToolTips(s, tooltips, w / 2, h / 10 + h / 2, w, h);
 
@@ -118,38 +122,11 @@ public class HudSpanner {
             BlockPos hitPos = r.getPos();
             TileEntity t = world.getTileEntity(hitPos);
             render(t instanceof CmTileMachine, player, e.getMatrixStack(), hitPos, t, d);
-
-            if(r.getType() == RayTraceResult.Type.MISS) return;
-
-            //RENDER BINDING
-            if(!world.getBlockState(hitPos).isSolid()) {
-                hitPos = hitPos.down();//if not solid, like crop, render it under a block
-            }
-            BlockPos biPos = new BlockPos(
-                    ItemUtil.getTag(i, "bindX"),
-                    ItemUtil.getTag(i, "bindY"),
-                    ItemUtil.getTag(i, "bindZ")
-            );
-            TileEntity t2 = world.getTileEntity(biPos);
-
-            if(t2 instanceof CmTileMachineRadiused) {
-                CmTileMachineRadiused ttr = (CmTileMachineRadiused) t2;
-                int rad = ttr.getRadiusFromLevel(ExcUtil.safeInt(ClientHolder.level.get(biPos)));
-                if(biPos.withinDistance(hitPos, rad)) {
-                    WorkUtil.runInFlat(3, hitPos, (pin) -> {
-                        if(pin.withinDistance(biPos, rad) && Math.random() < 0.3) {
-                            ParticleSpawner.spawnClt(ParticleSpawner.RANGE,
-                                    pin.getX() + Math.random(),
-                                    pin.getY() + 1.2,
-                                    pin.getZ() + Math.random(),
-                                    0
-                            );
-                        }
-                        return false;
-                    });
-
-                }
-            }
+            ParticleSpawner.spawnClt(ParticleSpawner.RANGE,
+                    hitPos.getX() + Math.random(),
+                    hitPos.getY() + Math.random(),
+                    hitPos.getZ() + Math.random(),
+                    1);
         }
 
     }

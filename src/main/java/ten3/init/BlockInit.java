@@ -6,7 +6,8 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.RegistryObject;
 import ten3.TechnicalEngineering;
 import ten3.core.block.*;
-import ten3.core.starlight.special.*;
+import ten3.core.machine.Engine;
+import ten3.core.machine.Machine;
 import ten3.core.machine.cable.Cable;
 import ten3.core.machine.cell.Cell;
 
@@ -38,14 +39,13 @@ public class BlockInit {
         regMachine("mob_ripper");
         regMachine("quarry");
         regMachine("psionicant");
+        regMachine("induction_furnace");
 
         regCable("cable_glass", Material.GLASS, SoundType.GLASS);
         regCable("cable_golden", Material.IRON, SoundType.STONE);
 
         regCell("cell_glass", Material.GLASS, SoundType.GLASS);
         regCell("cell_golden", Material.IRON, SoundType.STONE);
-
-        StarlightBase.fl();
     }
 
     public static void regMachine(String id_out) {

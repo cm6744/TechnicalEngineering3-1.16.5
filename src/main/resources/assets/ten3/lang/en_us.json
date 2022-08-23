@@ -2,6 +2,13 @@
   "itemGroup.ten3.item": "Technical Engineering 3 | Item",
   "itemGroup.ten3.block": "Technical Engineering 3 | Block",
 
+  "dire.down": "Down",
+  "dire.up": "Up",
+  "dire.north": "North",
+  "dire.south": "South",
+  "dire.west": "West",
+  "dire.east": "East",
+
   "ten3.starlight_stone": "Starlight Stone",
   "ten3.starlight_andesite": "Starlight Andesite",
   "ten3.starlight_diorite": "Starlight Diorite",
@@ -73,6 +80,7 @@
   "ten3.machine_mob_ripper": "Mob Ripper",
   "ten3.machine_quarry": "Quarry",
   "ten3.machine_psionicant": "Psionicant",
+  "ten3.machine_induction_furnace": "Induction Furnace",
 
   "ten3.cell_glass": "Glass Energy Cell",
   "ten3.cell_golden": "Golden Energy Cell",
@@ -91,10 +99,14 @@
   "ten3.augmented_levelup": "Augmented Levelup Kit",
   "ten3.powered_levelup": "Powered Levelup Kit",
   "ten3.relic_levelup": "Ancient Levelup Kit",
+  "ten3.range_levelup": "Range Levelup Kit",
+  "ten3.photosyn_levelup": "Photosynthetic Levelup Kit",
 
   "ten3.augmented_levelup.0": "Provide extra 1 upgrade slot. 20% cap up.",
   "ten3.powered_levelup.0": "Provide extra 2 upgrade slots, 35% cap up.",
   "ten3.relic_levelup.0": "Provide no upgrade slots, 100% cap up.",
+  "ten3.range_levelup.0": "Provide no upgrade slots, 50% range up.",
+  "ten3.photosyn_levelup.0": "Provide extra 1 upgrade slots, 15% efficiency down.",
 
   "ten3.level.0": " (Common)",
   "ten3.level.1": " (Hard)",
@@ -107,6 +119,7 @@
   "ten3.info.spanner.dire.energy": "Energy Transference: ",
   "ten3.info.spanner.dire.item": "Item Transference: ",
   "ten3.info.spanner.dire.redstone": "Redstone Mode: ",
+  "ten3.info.spanner.work_radius": "Work Radius: ",
   "ten3.info.spanner.mode": "Mode: ",
   "ten3.info.mode.0": "Energy",
   "ten3.info.mode.1": "Item",
@@ -183,6 +196,9 @@
 
   "ten3.info.psionicant.0": "Explore...",
 
+  "ten3.info.induction_furnace.0": "Induction Furnace can be used to make alloy.",
+  "ten3.info.induction_furnace.1": "It will have more output ingot than hand-making.",
+
 
 
   "ten3.adv.root": "Technical Engineering 3",
@@ -202,5 +218,9 @@
   "ten3.adv.span": "Machine engineer",
   "ten3.adv.span.0": "Spanner, it helps you to option machines.",
   "ten3.adv.relic": "Present and past",
-  "ten3.adv.relic.0": "Get a relic levelup kit, wherever."
+  "ten3.adv.relic.0": "Get a relic levelup kit, wherever.",
+  "ten3.adv.bizarrerie": "UU?",
+  "ten3.adv.bizarrerie.0": "get a bizarrerie by psionicant.",
+  "ten3.adv.psionic": "It's not scientific",
+  "ten3.adv.psionic.0": "Craft a psionicant."
 }

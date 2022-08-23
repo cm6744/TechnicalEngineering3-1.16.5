@@ -2,6 +2,13 @@
   "itemGroup.ten3.item": "科能工程3 | 物品",
   "itemGroup.ten3.block": "科能工程3 | 方块",
 
+  "dire.down": "底面",
+  "dire.up": "顶面",
+  "dire.north": "北面",
+  "dire.south": "南面",
+  "dire.west": "西面",
+  "dire.east": "东面",
+
   "ten3.starlight_stone": "星光岩石",
   "ten3.starlight_andesite": "星光安山岩",
   "ten3.starlight_diorite": "星光闪长岩",
@@ -73,6 +80,7 @@
   "ten3.machine_mob_ripper": "生物啃噬者",
   "ten3.machine_quarry": "采矿场",
   "ten3.machine_psionicant": "灵能处理器",
+  "ten3.machine_induction_furnace": "感应炉",
 
   "ten3.cable_glass": "玻璃能量线缆",
   "ten3.cable_golden": "黄金能量线缆",
@@ -91,10 +99,14 @@
   "ten3.augmented_levelup": "增强升级组件",
   "ten3.powered_levelup": "充能升级组件",
   "ten3.relic_levelup": "遗落升级组件",
+  "ten3.range_levelup": "范围升级组件",
+  "ten3.photosyn_levelup": "光合升级组件",
 
   "ten3.augmented_levelup.0": "提供 1 个额外升级槽位， 20% 效能提升。",
   "ten3.powered_levelup.0": "提供 2 个额外升级槽位， 35% 效能提升。",
   "ten3.relic_levelup.0": "不提供额外升级槽位， 100% 效能提升。",
+  "ten3.range_levelup.0": "不提供额外升级槽位， 50% 范围提升。",
+  "ten3.photosyn_levelup.0": "提供 1 个额外升级槽位， 15% 功率减耗。",
 
   "ten3.level.0": " (普通)",
   "ten3.level.1": " (坚硬)",
@@ -107,6 +119,7 @@
   "ten3.info.spanner.dire.energy": "能量传输: ",
   "ten3.info.spanner.dire.item": "物品传输: ",
   "ten3.info.spanner.dire.redstone": "红石模式: ",
+  "ten3.info.spanner.work_radius": "工作半径: ",
   "ten3.info.spanner.mode": "模式:",
   "ten3.info.mode.0": "能量",
   "ten3.info.mode.1": "物品",
@@ -182,6 +195,10 @@
 
   "ten3.info.psionicant.0": "探索...",
 
+  "ten3.info.induction_furnace.0": "感应炉可以用来制作合金。",
+  "ten3.info.induction_furnace.1": "比你手工做的产量高！",
+
+
 
 
   "ten3.adv.root": "科能工程3",
@@ -201,5 +218,9 @@
   "ten3.adv.span": "机械工程师",
   "ten3.adv.span.0": "扳手，它会帮助你调配机器的。",
   "ten3.adv.relic": "过去与现在",
-  "ten3.adv.relic.0": "得到一个遗落升级组件，无论在哪。"
+  "ten3.adv.relic.0": "得到一个遗落升级组件，无论在哪。",
+  "ten3.adv.bizarrerie": "UU?",
+  "ten3.adv.bizarrerie.0": "用灵能处理器制作一个奇异物质。",
+  "ten3.adv.psionic": "这不科学",
+  "ten3.adv.psionic.0": "制作一个灵能处理器。"
 }

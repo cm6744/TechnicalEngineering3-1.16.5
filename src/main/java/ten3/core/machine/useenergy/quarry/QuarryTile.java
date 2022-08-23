@@ -25,6 +25,7 @@ public class QuarryTile extends CmTileMachineRadiused {
         super(name);
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OUT, 10);
+        initialRadius = 3;
 
         List<Item> v1 = SlotCm.RECEIVE_ALL_INPUT;
 
@@ -49,25 +50,6 @@ public class QuarryTile extends CmTileMachineRadiused {
     @Override
     public Type typeOf() {
         return Type.MACHINE_EFFECT;
-    }
-
-    @Override
-    public int getRadiusFromLevel(int levelIn)
-    {
-        return (levelIn + 1) * 3;
-    }
-
-    @Override
-    public boolean isInWorkRadius(BlockPos pos)
-    {
-        boolean ret = false;
-        BlockPos now = this.pos;
-        while(!ret) {
-            ret = pos.withinDistance(now, radius);
-            now = this.pos.down();
-            if(World.isOutsideBuildHeight(now)) break;
-        }
-        return ret;
     }
 
     public void update() {

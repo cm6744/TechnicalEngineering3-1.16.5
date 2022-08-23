@@ -4,8 +4,8 @@
     "tag": "forge:stone"
   },
   "ingredient1": {
-    "item": "minecraft:granite"
+    "item": "minecraft:ink_sak"
   },
   "output": "minecraft:obsidian",
-  "time": 100
+  "time": 200
 }

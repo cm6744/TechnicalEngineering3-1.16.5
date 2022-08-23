@@ -23,6 +23,7 @@ public class MobRipTile extends CmTileMachineRadiused {
     public MobRipTile(String name) {
 
         super(name);
+        initialRadius = 8;
 
         setCap(kFE(20), FaceOption.BE_IN, FaceOption.OFF, 15);
 
@@ -30,23 +31,6 @@ public class MobRipTile extends CmTileMachineRadiused {
             return e.getItem() instanceof ToolItem || e.getItem() instanceof SwordItem;
         }, false, false));
 
-    }
-
-    @Override
-    public Type typeOf() {
-        return Type.MACHINE_EFFECT;
-    }
-
-    @Override
-    public int getRadiusFromLevel(int levelIn)
-    {
-        return (levelIn + 1) * 6;
-    }
-
-    @Override
-    public boolean isInWorkRadius(BlockPos pos)
-    {
-        return pos.withinDistance(this.pos, radius);
     }
 
     public void update() {

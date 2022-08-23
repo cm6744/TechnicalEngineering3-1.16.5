@@ -56,6 +56,8 @@ public class ItemInit {
         regItem("augmented_levelup", new LevelupAug());
         regItem("powered_levelup", new LevelupPower());
         regItem("relic_levelup", new LevelupAnc());
+        regItem("range_levelup", new LevelupRg());
+        regItem("photosyn_levelup", new LevelupSyn());
 
         //ores
         regItemBlockDef("tin_ore");
@@ -74,6 +76,7 @@ public class ItemInit {
         regItemMachine("mob_ripper");
         regItemMachine("quarry");
         regItemMachine("psionicant");
+        regItemMachine("induction_furnace");
 
         regItemMachineWithoutID("cell_glass");
         regItemMachineWithoutID("cell_golden");

@@ -13,6 +13,7 @@ import ten3.lib.tile.option.Type;
 public abstract class CmTileMachineRadiused extends CmTileMachine {
 
     public int radius;
+    public int initialRadius;
 
     @Override
     public Type typeOf() {
@@ -24,14 +25,10 @@ public abstract class CmTileMachineRadiused extends CmTileMachine {
     }
 
     @Override
-    public void update()
+    public void resetAll()
     {
-        super.update();
-        radius = getRadiusFromLevel(levelIn);
+        super.resetAll();
+        radius = initialRadius;
     }
-
-    public abstract int getRadiusFromLevel(int level);
-
-    public abstract boolean isInWorkRadius(BlockPos pos);
 
 }

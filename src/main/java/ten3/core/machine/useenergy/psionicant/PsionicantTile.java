@@ -1,6 +1,8 @@
 package ten3.core.machine.useenergy.psionicant;
 
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import ten3.core.recipe.IBaseRecipeCm;
 import ten3.init.RecipeInit;
 import ten3.lib.tile.option.FaceOption;
@@ -8,11 +10,16 @@ import ten3.lib.tile.recipe.CmTileMachineProcessed;
 import ten3.lib.tile.recipe.SlotInfo;
 import ten3.lib.wrapper.SlotCm;
 import ten3.lib.wrapper.SlotCustomCm;
+import ten3.util.ExcUtil;
 import ten3.util.ItemUtil;
 import ten3.util.KeyUtil;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
+
+import static ten3.util.ExcUtil.hasRcpUseThisItem;
 
 public class PsionicantTile extends CmTileMachineProcessed {
 
@@ -30,27 +37,17 @@ public class PsionicantTile extends CmTileMachineProcessed {
     }
 
     @Override
-    public boolean customFitStackIn(ItemStack s, int slot) {
+    public boolean customFitStackIn(ItemStack s, int slot)
+    {
         List<ItemStack> lst = inventory.getStackInRange(0, 1);
-        if(lst.size() >= 2) {
-            return true;//if full, true
+        for(ItemStack s2 : lst) {
+            if(s2.getItem() == s.getItem()) return false;
         }
         if(lst.size() == 0) {
-            return hasRcpUseThisItem(recipeType, s);
+            return hasRcpUseThisItem(world, recipeType, s);
         }
-        ItemStack[] sarr = ItemUtil.merge(s, lst.get(0));
-        if(sarr.length == 1) {
-            return hasRcpUseThisItem(recipeType, sarr[0]);
-        }
-        return getRcp(recipeType, sarr) != null;
-    }
-
-    @Override
-    public void cacheRcp()
-    {
-        ItemStack i1 = inventory.getStackInSlot(0);
-        ItemStack i2 = inventory.getStackInSlot(1);
-        recipeNow = getRcp(recipeType, i1, i2);
+        Collection<IRecipe<IInventory>> recs = ExcUtil.getRcpUseThisItem(world, recipeType, lst.get(0));
+        return ExcUtil.hasRcpUseThisItem(world, recipeType, recs, s);
     }
 
     @Override

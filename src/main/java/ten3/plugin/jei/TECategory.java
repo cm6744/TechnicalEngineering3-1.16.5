@@ -24,6 +24,15 @@ public abstract class TECategory<T extends OpportunityRecipe<IInventory>> extend
         List<Ingredient> ingredientList = new ArrayList<>();
         ingredientList.addAll(t.getIngredients());
         appendListIn(ingredientList, t);
+        List<Ingredient> removeLst = new ArrayList<>();
+        for(Ingredient ing : ingredientList) {
+            for(ItemStack stack : ing.getMatchingStacks()) {
+                if(stack.isEmpty()) {
+                    removeLst.add(ing);
+                }
+            }
+        }
+        ingredientList.removeAll(removeLst);
         iIngredients.setInputIngredients(ingredientList);
 
         List<ItemStack> so = t.output();

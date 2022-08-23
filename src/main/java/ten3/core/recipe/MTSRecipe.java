@@ -8,22 +8,21 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MTSRecipe extends SingleRecipe {
     
-    public CmItemList ingredient2;
-    public int ing1c;
-    public int ing2c;//TODO
-    
+    public List<CmItemList> ingredients;
+
     public MTSRecipe(ResourceLocation regName, ResourceLocation idIn,
-                     CmItemList ingredient, CmItemList ingredient2, ItemStack resultIn, ItemStack add,
+                     List<CmItemList> ings, ItemStack resultIn, ItemStack add,
                      int cookTimeIn, int countOut, double cc) {
 
-        super(regName, idIn, ingredient, resultIn, add, cookTimeIn, countOut, cc);
-        this.ingredient2 = ingredient2;
+        super(regName, idIn, ings.get(0), resultIn, add, cookTimeIn, countOut, cc);
+        this.ingredients = ings;
     }
 
     @Override
@@ -35,26 +34,37 @@ public class MTSRecipe extends SingleRecipe {
     @Override
     public boolean matches(IInventory inv, World worldIn)
     {
-        return (ingredient.hasValidIn(inv.getStackInSlot(0))
-                && ingredient2.hasValidIn(inv.getStackInSlot(1)))
-                || (ingredient.hasValidIn(inv.getStackInSlot(1))
-                && ingredient2.hasValidIn(inv.getStackInSlot(0)));
-
+        List<ItemStack> invs = new ArrayList<>();
+        for(int i = 0; i < ingredients.size(); i++) {
+            invs.add(inv.getStackInSlot(i));
+        }
+        for(int i = 0; i < ingredients.size(); i++) {
+            if(!ingredients.get(i).hasValidIn(invs.toArray(new ItemStack[0]))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients()
     {
-        return NonNullList.from(Ingredient.EMPTY, ingredient.vanillaIngre(), ingredient2.vanillaIngre());
+        NonNullList<Ingredient> nonNullList = NonNullList.create();//fucking mojang extends AbstractList
+        for(CmItemList lst : ingredients) {
+            nonNullList.add(lst.vanillaIngre());
+        }
+        return nonNullList;
     }
 
     @Override
     public int inputLimit(ItemStack stack)
     {
-        if(ingredient.hasValidIn(stack))
-        return ingredient.limit;
-        else
-        return ingredient2.limit;
+        for(CmItemList lst : ingredients) {
+            if(lst.hasValidIn(stack)) {
+                return lst.limit;
+            }
+        }
+        return 0;
     }
 
 }

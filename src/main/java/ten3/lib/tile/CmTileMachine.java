@@ -11,13 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -26,10 +25,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import ten3.TConst;
-import ten3.core.block.Machine;
-import ten3.core.block.MachinePostEvent;
+import ten3.core.machine.Machine;
+import ten3.core.machine.MachinePostEvent;
 import ten3.core.item.upgrades.UpgradeItem;
-import ten3.util.DireUtil;
+import ten3.util.*;
 import ten3.lib.capability.energy.EnergyTransferor;
 import ten3.lib.capability.energy.FEStorageTile;
 import ten3.lib.capability.item.InventoryWrapperCm;
@@ -38,8 +37,6 @@ import ten3.lib.tile.option.FaceOption;
 import ten3.lib.tile.option.RedstoneMode;
 import ten3.lib.tile.option.Type;
 import ten3.lib.wrapper.*;
-import ten3.util.ExcUtil;
-import ten3.util.KeyUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -65,18 +62,9 @@ public abstract class CmTileMachine extends CmTileEntity {
         return ExcUtil.safeGetRecipe(world, type, new Inventory(stacks)).orElse(null);
     }
 
-    public boolean hasRcpUseThisItem(IRecipeType<? extends IRecipe<IInventory>> type, ItemStack stack) {
-        Collection<? extends IRecipe<IInventory>> recipes = ExcUtil.safeGetRecipes(world, type);
-        final boolean[] ret = new boolean[1];
-        recipes.stream().forEach((r) -> {
-            NonNullList<Ingredient> ings = r.getIngredients();
-            ings.stream().forEach((i) -> {
-                if(i.test(stack)) {
-                    ret[0] = true;
-                }
-            });
-        });
-        return ret[0];
+    @Nullable
+    public<T extends IRecipe<IInventory>> T getRcp(IRecipeType<T> type, Inventory inventory) {
+        return ExcUtil.safeGetRecipe(world, type, inventory).orElse(null);
     }
 
     //data poses.
@@ -173,6 +161,15 @@ public abstract class CmTileMachine extends CmTileEntity {
 
     }
 
+    @Override
+    public int[] getItemFirstTransferSlot(Item i)
+    {
+        if(i instanceof UpgradeItem) {
+            return new int[] {upgSlotFrom, upgSlotTo};
+        }
+        return super.getItemFirstTransferSlot(i);
+    }
+
     public boolean customFitStackIn(ItemStack s, int slot) {
         return true;
     }
@@ -195,7 +192,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     public void packets() {
 
         for(Direction d : Direction.values()) {
-            MachinePostEvent.updateToClient(direCheckEnergy(d), direCheckItem(d), data.get(RED_MODE), levelIn, pos, d);
+            MachinePostEvent.updateToClient(this, d, pos);
         }
 
     }
@@ -233,7 +230,7 @@ public abstract class CmTileMachine extends CmTileEntity {
     private Queue<Direction> qr = Queues.newArrayDeque(Lists.newArrayList(Direction.values()));
     double actualEffPercent;
 
-    public ITextComponent getDisplayWith() {
+    public IFormattableTextComponent getDisplayWith() {
 
         return KeyUtil.translated(TConst.modid + "." + id, TConst.modid + ".level." + levelIn);
 
@@ -262,21 +259,26 @@ public abstract class CmTileMachine extends CmTileEntity {
             if(ik instanceof UpgradeItem) {
                 ((UpgradeItem) ik).effect(this);
             }
+
         }
 
         if(!startTick) {
-            efficientIn = initialEfficientIn;
-            maxExtractItem = initialItemExtract;
-            maxReceiveItem = initialItemReceive;
-            maxExtract = initialExtract;
-            maxReceive = initialReceive;
-            maxStorage = initialStorage;//reset all, but data storage them to client!
-            upgSize = initialUpgSize;
-            levelIn = 0;
+            resetAll();
         }
 
         //levelIn = upgs;
 
+    }
+
+    public void resetAll() {
+        efficientIn = initialEfficientIn;
+        maxExtractItem = initialItemExtract;
+        maxReceiveItem = initialItemReceive;
+        maxExtract = initialExtract;
+        maxReceive = initialReceive;
+        maxStorage = initialStorage;//reset all, but data storage them to client!
+        upgSize = initialUpgSize;
+        levelIn = 0;
     }
 
     public boolean hasUpgrade(UpgradeItem item) {
@@ -334,10 +336,13 @@ public abstract class CmTileMachine extends CmTileEntity {
         setActive(cacheTimeActive > 0);
 
         //tran items
-        if(checkCanRun() && isActive()) {
-            //if(hasCapabilityOutputItem) {
+        if(checkCanRun()) {
             transferEnergy();
             transferItem();
+        }
+
+        if(getTileAliveTime() % 100 == 0) {
+            packets();
         }
 
     }

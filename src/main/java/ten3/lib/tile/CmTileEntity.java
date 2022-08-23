@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -23,6 +24,7 @@ import ten3.lib.capability.item.InventoryCm;
 import ten3.lib.wrapper.*;
 import ten3.util.KeyUtil;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 
 public abstract class CmTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
@@ -48,6 +50,11 @@ public abstract class CmTileEntity extends TileEntity implements ITickableTileEn
     public CmTileEntity(TileEntityType<?> type, String fullTranslationKey) {
         super(type);
         component = KeyUtil.translated(fullTranslationKey);
+    }
+
+    @Nonnull
+    public int[] getItemFirstTransferSlot(Item i) {
+        return new int[] {};
     }
 
     public void rdt(CompoundNBT nbt) {}

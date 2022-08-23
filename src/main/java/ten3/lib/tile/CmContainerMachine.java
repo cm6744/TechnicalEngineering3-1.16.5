@@ -26,6 +26,23 @@ public class CmContainerMachine extends CmContainer {
 
     }
 
+    public static boolean isInBackpack(int slot) {
+        return slot >= playerMin && slot < playerMax;
+    }
+
+    public static boolean isInFastBar(int slot) {
+        return slot >= fastMin && slot < fastMax;
+    }
+
+    public static boolean isInTile(int slot) {
+        return slot >= playerMax;
+    }
+
+    static int playerMin=0;
+    static int playerMax=36;
+    static int fastMin=0;
+    static int fastMax=9;
+
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
 
         ItemStack itemstack = ItemStack.EMPTY;
@@ -35,17 +52,28 @@ public class CmContainerMachine extends CmContainer {
             if(slot.getHasStack()) {
                 ItemStack itemstack1 = slot.getStack();
                 itemstack = itemstack1.copy();
-                if(slot.inventory == ti) {
-                    //push to player's inv
-                    if(!mergeItemStack(itemstack1, 0, 35, false)) {
-                        return ItemStack.EMPTY;
+                if (isInBackpack(index)) {
+                    int[] iarr = tileEntity.getItemFirstTransferSlot(itemstack1.getItem());
+                    if(iarr.length == 2) {
+                        int p1 = inventorySlots.indexOf(ti.match(iarr[0]));
+                        int p2 = inventorySlots.indexOf(ti.match(iarr[1]));
+                        if(!mergeItemStack(itemstack1, p1, p2, false)) {
+                            return ItemStack.EMPTY;
+                        }
                     }
-                }
-                else if(slot.inventory == playerIn.inventory) {
-                    //push to machine's inv
-                    if(!mergeItemStack(itemstack1, 36, inventorySlots.size(), false)) {
-                        return ItemStack.EMPTY;
+                    if(!this.mergeItemStack(itemstack1, playerMax, inventorySlots.size(), false)) {
+                        if(!isInFastBar(index)) {
+                            if(!this.mergeItemStack(itemstack1, fastMin, fastMax, false)) {
+                                //to fast bar
+                                return ItemStack.EMPTY;
+                            }
+                        } else if(!this.mergeItemStack(itemstack1, fastMax, playerMax, false)) {
+                            //to other backpack slots
+                            return ItemStack.EMPTY;
+                        }
                     }
+                } else if (!this.mergeItemStack(itemstack1, playerMin, playerMax, false)) {
+                    return ItemStack.EMPTY;
                 }
                 if(itemstack1.getCount() == 0) {
                     slot.putStack(ItemStack.EMPTY);

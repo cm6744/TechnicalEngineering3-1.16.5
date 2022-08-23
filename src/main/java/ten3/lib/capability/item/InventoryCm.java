@@ -12,11 +12,21 @@ import java.util.List;
 public class InventoryCm extends Inventory {
 
     List<SlotCm> slots;
+    CmTileEntity tile;
 
     public InventoryCm(int size, CmTileEntity t) {
 
         super(size);
         slots = t.slots;
+        tile = t;
+    }
+
+    public InventoryCm copy() {
+        InventoryCm inv = new InventoryCm(getSizeInventory(), tile);
+        for(int i = 0; i < getSizeInventory(); i++) {
+            inv.setInventorySlotContents(i, getStackInSlot(i));
+        }
+        return inv;
     }
 
     //used in InvWrapper, by FORGE.

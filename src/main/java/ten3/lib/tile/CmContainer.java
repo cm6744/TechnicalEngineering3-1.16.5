@@ -44,15 +44,14 @@ public abstract class CmContainer extends Container {
 
     public void layoutPlayerInventorySlots(IInventory inventory, int left, int top) {
 
-        int x;
-        int y;
-        for (x = 0; x < 3; ++x) {
-            for(y = 0; y < 9; ++y) {//9~27
-                addSlot(new Slot(inventory, y + (x + 1) * 9, left + y * 18, top + x * 18));
+        for(int i = 0; i < 3; ++i) {
+            for(int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-        for (x = 0; x < 9; ++x) {//0~9
-            addSlot(new Slot(inventory, x, left + x * 18, top + 58));
+
+        for(int k = 0; k < 9; ++k) {
+            this.addSlot(new Slot(inventory, k, 8 + k * 18, 142));
         }
 
     }

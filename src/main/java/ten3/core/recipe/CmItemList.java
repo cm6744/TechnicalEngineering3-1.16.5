@@ -28,7 +28,7 @@ public class CmItemList {
     public List<ItemStack> stackLstOf() {
         List<ItemStack> ss = new ArrayList<>();
         for(Item i : matches) {
-            ItemStack p = i.getDefaultInstance();
+            ItemStack p = new ItemStack(i);
             p.setCount(limit);
             ss.add(p);
         }
@@ -52,13 +52,18 @@ public class CmItemList {
 
     public CmItemList() {
         matches = Lists.newArrayList(Items.AIR);
-        type = "mark_empty";
+        type = "empty";
         limit = 1;
     }
 
     public boolean hasValidIn(ItemStack... s) {
         for(ItemStack k : s) {
-            if(matches.contains(k.getItem()) && k.getCount() >= limit) {
+            if(type.equals("empty")) {
+                if(k.isEmpty()) {
+                    return true;
+                }
+            }
+            else if(matches.contains(k.getItem()) && k.getCount() >= limit) {
                 return true;
             }
         }
@@ -87,10 +92,6 @@ public class CmItemList {
 
     public static CmItemList parseFrom(JsonObject json) {
 
-        if(json.has("mark_empty")) {
-            return new CmItemList();//cannot check item!
-        }
-
         int lm = JSONUtils.getInt(json, "count", 1);
 
         if (json.has("item")) {
@@ -108,10 +109,6 @@ public class CmItemList {
         String type = buffer.readString();
         ResourceLocation rl = buffer.readResourceLocation();
         int lm = buffer.readInt();
-
-        if(type.equals("mark_empty")) {
-            return new CmItemList();//cannot check item!
-        }
 
         if(type.equals("item")) {
             return GET_ITEM(rl.toString(), lm);
