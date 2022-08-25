@@ -6,6 +6,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import ten3.core.machine.Cable;
 import ten3.lib.capability.energy.EnergyTransferor;
 import ten3.lib.capability.energy.FEStorageWayFinding;
 import ten3.lib.tile.CmTileMachine;

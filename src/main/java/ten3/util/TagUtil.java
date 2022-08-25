@@ -12,7 +12,11 @@ public class TagUtil {
     }
 
     public static boolean containsBlock(Block t, String s) {
-        return TagCollectionManager.getManager().getBlockTags().get(new ResourceLocation(s)).contains(t);
+        try {
+            return TagCollectionManager.getManager().getBlockTags().get(new ResourceLocation(s)).contains(t);
+        } catch(NullPointerException e) {
+            return false;
+        }
     }
 
 }

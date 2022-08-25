@@ -8,6 +8,7 @@ import ten3.core.machine.cable.CableTile;
 import ten3.lib.capability.Finder;
 import ten3.lib.tile.CmTileMachine;
 import ten3.util.DireUtil;
+import ten3.util.ExcUtil;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class FEStorageWayFinding extends FEStorageTile {
     @Override
     public int receiveEnergy(int receive, boolean simulate) {
         if(canReceive()) {
-            return listTransferTo(nets.get(tile.getPos()), receive);
+            return listTransferTo(nets.get(tile.getPos()), receive, simulate);
         }
         return 0;
     }
@@ -39,7 +40,7 @@ public class FEStorageWayFinding extends FEStorageTile {
     @Override
     public int extractEnergy(int extract, boolean simulate) {
         if(canExtract()) {
-            return listTransferFrom(nets.get(tile.getPos()), extract);
+            return listTransferFrom(nets.get(tile.getPos()), extract, simulate);
         }
         return 0;
     }
@@ -110,18 +111,22 @@ public class FEStorageWayFinding extends FEStorageTile {
     }
 
 
-    public int listTransferTo(List<IEnergyStorage> es, int v) {
+    public int listTransferTo(List<IEnergyStorage> es, int v, boolean s) {
 
         int size = getSizeCanTrsIn(es);
 
         if(es == null) return 0;
-        if(v < size || size == 0) return 0;
+        if(size == 0) return 0;
+
+        if(v < size) {
+            return ExcUtil.randomInCollection(es).receiveEnergy(v, s);
+        }
 
         int total = 0;
 
         for(IEnergyStorage e : es) {
             if(!e.canReceive()) continue;
-            int diff = e.receiveEnergy(Math.min(caps.get(tile.getPos()), v / size), false);
+            int diff = e.receiveEnergy(v / size, s);
             total += diff;
         }
 
@@ -129,18 +134,22 @@ public class FEStorageWayFinding extends FEStorageTile {
 
     }
 
-    public int listTransferFrom(List<IEnergyStorage> es, int v) {
+    public int listTransferFrom(List<IEnergyStorage> es, int v, boolean s) {
 
         int size = getSizeCanTrsOut(es);
 
         if(es == null) return 0;
-        if(v < size || size == 0) return 0;
+        if(size == 0) return 0;
+
+        if(v < size) {
+            return ExcUtil.randomInCollection(es).extractEnergy(v, s);
+        }
 
         int total = 0;
 
         for(IEnergyStorage e : es) {
             if(!e.canExtract()) continue;
-            int diff = e.extractEnergy(Math.min(caps.get(tile.getPos()), v / size), false);
+            int diff = e.extractEnergy(v / size, s);
             total += diff;
         }
 

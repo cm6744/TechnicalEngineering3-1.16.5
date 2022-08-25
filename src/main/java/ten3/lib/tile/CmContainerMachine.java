@@ -56,7 +56,7 @@ public class CmContainerMachine extends CmContainer {
                     int[] iarr = tileEntity.getItemFirstTransferSlot(itemstack1.getItem());
                     if(iarr.length == 2) {
                         int p1 = inventorySlots.indexOf(ti.match(iarr[0]));
-                        int p2 = inventorySlots.indexOf(ti.match(iarr[1]));
+                        int p2 = inventorySlots.indexOf(ti.match(iarr[1] + 1));
                         if(!mergeItemStack(itemstack1, p1, p2, false)) {
                             return ItemStack.EMPTY;
                         }

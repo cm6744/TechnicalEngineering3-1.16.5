@@ -1,7 +1,7 @@
 
 
 //version of mod.
-version = '3.0.6.0'
+version = '3.0.7.0'
 
 
 
@@ -21,7 +21,7 @@ apply plugin: 'net.minecraftforge.gradle'
 group = 'TechnicalEngineering3'
 archivesBaseName = 'TechnicalEngineering3'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.

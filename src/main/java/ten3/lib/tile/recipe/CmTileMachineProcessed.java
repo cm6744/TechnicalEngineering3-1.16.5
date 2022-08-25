@@ -70,7 +70,9 @@ public abstract class CmTileMachineProcessed extends CmTileMachine {
             ItemStack stack = inventory.getStackInSlot(i);
             int c1 = ((IBaseRecipeCm<?>) recipeNow).inputLimit(stack);
             if(!stack.getContainerItem().isEmpty()) {
-                Block.spawnAsEntity(world, pos, stack.getContainerItem());
+                ItemStack s2 = stack.getContainerItem();
+                s2.setCount(c1);
+                Block.spawnAsEntity(world, pos, s2);
             }
             stack.shrink(c1);
         }

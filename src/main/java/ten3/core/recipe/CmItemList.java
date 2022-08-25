@@ -16,6 +16,7 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CmItemList {
 
@@ -57,17 +58,18 @@ public class CmItemList {
     }
 
     public boolean hasValidIn(ItemStack... s) {
+        boolean ret = false;
         for(ItemStack k : s) {
             if(type.equals("empty")) {
-                if(k.isEmpty()) {
-                    return true;
-                }
+                if(k.isEmpty())
+                    ret = true;
             }
-            else if(matches.contains(k.getItem()) && k.getCount() >= limit) {
-                return true;
+            else {
+                if(vanillaIngre().test(k) && k.getCount() >= limit)
+                    ret = true;
             }
         }
-        return false;
+        return ret;
     }
 
     public Ingredient vanillaIngre() {
@@ -76,8 +78,11 @@ public class CmItemList {
 
     private static CmItemList GET_ITEM(String i, int im) {
         ResourceLocation rl = new ResourceLocation(i);
-        Item item = Registry.ITEM.getOptional(rl).orElse(null);
-        return new CmItemList(item, im, rl);
+        Optional<Item> item = Registry.ITEM.getOptional(rl);
+        if(item.isPresent() && item.get() != Items.AIR) {
+            return new CmItemList(item.get(), im, rl);
+        }
+        return new CmItemList();
     }
 
     private static CmItemList GET_TAG(String i, int im) {

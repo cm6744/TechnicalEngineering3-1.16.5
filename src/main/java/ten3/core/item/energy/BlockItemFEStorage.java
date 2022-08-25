@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import ten3.core.machine.cell.Cell;
+import ten3.core.machine.Cell;
 import ten3.init.template.DefItemBlock;
 import ten3.init.TileInit;
 import ten3.lib.tile.CmTileMachine;
